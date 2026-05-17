@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your profile · TOG3R</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="mascot/sam.css" />
+  <link rel="stylesheet" href="mascot/responses.css" />
+</head>
+
+<body>
+  <div class="bg-blobs" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+
+  <main class="stage">
+    <div class="signup-cluster" id="signupCluster">
+      <section class="card" id="card">
+        <div class="mascot" id="mascot" aria-hidden="true">
+          <div class="mascot-bubble" id="mascotBubble">
+            <span id="mascotText">Hi! I'm here to help.</span>
+          </div>
+          <div class="mascot-face" id="face">
+            <div class="eyebrow left"></div>
+            <div class="eyebrow right"></div>
+            <div class="eye left" id="eyeL"><span class="pupil"></span></div>
+            <div class="eye right" id="eyeR"><span class="pupil"></span></div>
+            <div class="blush left"></div>
+            <div class="blush right"></div>
+            <div class="mouth" id="mouth"></div>
+            <div class="hand left"></div>
+            <div class="hand right"></div>
+          </div>
+          <div class="mascot-body"></div>
+        </div>
+
+        <header class="card-head">
+          <h1>Hi there!</h1>
+          <p class="sub">Tell us a little about you</p>
+        </header>
+
+        <form class="form" id="profileForm" novalidate>
+          <div class="form-top-row" id="topRow">
+            <div class="inputs-col">
+              <label class="field" id="nameField">
+                <span class="label">Your name</span>
+                <div class="input-wrap">
+                  <input type="text" name="name" id="name" autocomplete="name" placeholder="name" required
+                    maxlength="15" />
+                  <span class="char-counter" id="nameCounter">0 / 15</span>
+                </div>
+              </label>
+
+              <label class="field" id="handleField">
+                <span class="label">Your nickname</span>
+                <div class="handle-wrap">
+                  <span class="handle-at" aria-hidden="true">@</span>
+                  <input type="text" name="handle" id="handle" autocomplete="nickname" placeholder="nickname" required
+                    maxlength="10" spellcheck="false" />
+                  <span class="char-counter" id="handleCounter">0 / 10</span>
+                </div>
+              </label>
+            </div>
+
+            <div class="pfp-col">
+              <button type="button" class="pfp-trigger" id="pfpTrigger" aria-label="Select avatar"
+                aria-expanded="false">
+                <div class="pfp-preview" id="pfpPreview">
+                  <svg class="icon icon-plus" viewBox="0 0 24 24" width="28" height="28" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <span class="pfp-trigger-label">Avatar</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="field field-dob" id="dobField">
+            <span class="label" id="dobLabel">Birthday</span>
+            <div class="dob-wrap">
+              <button type="button" class="date-trigger" id="dateTrigger" aria-haspopup="dialog" aria-expanded="false"
+                aria-labelledby="dobLabel dateDisplay" title="Date of Birth">
+                <span class="date-trigger-icon" aria-hidden="true">
+                  <svg class="icon icon-calendar" viewBox="0 0 24 24" width="28" height="28" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 2.75v3.5M16 2.75v3.5" stroke="currentColor" stroke-width="1.75"
+                      stroke-linecap="round" />
+                    <rect x="3.5" y="6.5" width="17" height="15" rx="2.5" stroke="currentColor" stroke-width="1.75" />
+                    <path d="M3.5 11.25h17" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+                    <circle cx="8" cy="16" r="1.35" fill="currentColor" opacity="0.4" />
+                    <circle cx="12" cy="16" r="1.35" fill="currentColor" opacity="0.75" />
+                    <circle cx="16" cy="16" r="1.35" fill="currentColor" opacity="0.4" />
+                  </svg>
+                </span>
+                <span id="dateDisplay">Birthday</span>
+              </button>
+              <input type="hidden" name="dob" id="dobInput" value="" />
+            </div>
+          </div>
+
+          <div class="field field-gender" id="genderField">
+            <label class="label">Gender</label>
+            <input type="hidden" id="gender" name="gender" value="" />
+            <div class="gender-options-grid">
+              <button type="button" class="gender-option-btn" data-value="male" data-tooltip="male" role="radio" aria-checked="false">
+                <span class="radio-circle"></span>
+                <svg class="gender-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="10" cy="14" r="5" />
+                  <path d="M14 10 L19 5" />
+                  <path d="M14 5 H19 V10" />
+                </svg>
+              </button>
+              <button type="button" class="gender-option-btn" data-value="female" data-tooltip="female" role="radio" aria-checked="false">
+                <span class="radio-circle"></span>
+                <svg class="gender-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="9" r="5" />
+                  <path d="M12 14 V21" />
+                  <path d="M9 17 H15" />
+                </svg>
+              </button>
+              <button type="button" class="gender-option-btn" data-value="gmail" data-tooltip="gmail" role="radio" aria-checked="false">
+                <span class="radio-circle"></span>
+                <svg class="gender-icon" viewBox="0 0 30 24" width="26" height="22" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="6" cy="14" r="3.5" />
+                  <path d="M8.5 11.5 L13 7" />
+                  <path d="M9 7 H13 V11" />
+                  <circle cx="20" cy="14" r="3.5" />
+                  <path d="M22.5 11.5 L27 7" />
+                  <path d="M23 7 H27 V11" />
+                </svg>
+              </button>
+              <button type="button" class="gender-option-btn" data-value="lesb" data-tooltip="lesb" role="radio" aria-checked="false">
+                <span class="radio-circle"></span>
+                <svg class="gender-icon" viewBox="0 0 30 24" width="26" height="22" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="6" cy="8" r="3.5" />
+                  <path d="M6 11.5 V18" />
+                  <path d="M3 15 H9" />
+                  <circle cx="20" cy="8" r="3.5" />
+                  <path d="M20 11.5 V18" />
+                  <path d="M17 15 H23" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <span class="btn-text">Continue</span>
+          </button>
+        </form>
+      </section>
+
+      <div class="calendar" id="calendar" role="dialog" aria-modal="true" aria-label="Birthday calculator" hidden>
+        <div class="cal-top">
+          <h2 class="sidebar-title" style="margin:0; font-size: 1.1rem;">Age / DOB</h2>
+          <button type="button" class="cal-nav close-btn" id="closeCalendar" aria-label="Close">
+            <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+              <path d="M6 6l12 12m0-12L6 18" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+        <div class="age-calc-body">
+          <div class="field" style="margin-bottom: 20px; text-align: center;">
+
+            <div class="dob-inputs-triple">
+              <input type="text" id="dayInput" placeholder="DD" maxlength="2" inputmode="numeric" />
+              <span class="sep">/</span>
+              <input type="text" id="monthInput" placeholder="MM" maxlength="2" inputmode="numeric" />
+              <span class="sep">/</span>
+              <input type="text" id="yearInput" placeholder="YYYY" maxlength="4" inputmode="numeric" />
+            </div>
+          </div>
+          
+          <div id="ageDisplay" class="age-display" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px;">
+            <div class="age-unit" style="background: rgba(255,126,179,0.1); padding: 10px; border-radius: 12px; text-align: center;">
+              <span id="ageYears" style="display: block; font-size: 1.2rem; font-weight: 800; color: var(--pink-deep);">0</span>
+              <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--ink-soft);">Years</span>
+            </div>
+            <div class="age-unit" style="background: rgba(255,126,179,0.1); padding: 10px; border-radius: 12px; text-align: center;">
+              <span id="ageMonths" style="display: block; font-size: 1.2rem; font-weight: 800; color: var(--pink-deep);">0</span>
+              <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--ink-soft);">Months</span>
+            </div>
+            <div class="age-unit" style="background: rgba(255,126,179,0.1); padding: 10px; border-radius: 12px; text-align: center;">
+              <span id="ageDays" style="display: block; font-size: 1.2rem; font-weight: 800; color: var(--pink-deep);">0</span>
+              <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--ink-soft);">Days</span>
+            </div>
+            <div class="age-unit" style="background: rgba(196,181,253,0.15); padding: 10px; border-radius: 12px; text-align: center;">
+              <span id="ageHours" style="display: block; font-size: 1.1rem; font-weight: 800; color: #7c3aed;">0</span>
+              <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--ink-soft);">Hours</span>
+            </div>
+            <div class="age-unit" style="background: rgba(196,181,253,0.15); padding: 10px; border-radius: 12px; text-align: center;">
+              <span id="ageMinutes" style="display: block; font-size: 1.1rem; font-weight: 800; color: #7c3aed;">0</span>
+              <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--ink-soft);">Mins</span>
+            </div>
+            <div class="age-unit" style="background: rgba(196,181,253,0.15); padding: 10px; border-radius: 12px; text-align: center;">
+              <span id="ageSeconds" style="display: block; font-size: 1.1rem; font-weight: 800; color: #7c3aed;">0</span>
+              <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--ink-soft);">Secs</span>
+            </div>
+          </div>
+          
+          <button type="button" class="btn-submit" id="ageDoneBtn" style="width: 100%; margin: 0; padding: 12px;">
+            <span class="btn-text">Done</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="pfp-sidebar" id="pfpSidebar" role="dialog" aria-modal="true" aria-label="Avatar selection" hidden>
+        <div class="sidebar-header">
+          <h2 class="sidebar-title">Avatar</h2>
+          <button type="button" class="cal-nav close-btn" id="closePfp" aria-label="Close">
+            <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+              <path d="M6 6l12 12m0-12L6 18" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="pfp-view" id="pfpSelectView">
+          <input type="file" id="pfpUpload" accept="image/png, image/jpeg, image/webp" hidden />
+          <p class="sidebar-sub">Choose a style</p>
+          <div class="pfp-grid" id="pfpGrid">
+            <!-- Upload, Design, and Templates injected via JS -->
+          </div>
+        </div>
+
+        <div class="pfp-view" id="pfpDesignView" hidden>
+          <p class="sidebar-sub">Design your avatar</p>
+          <div class="design-preview" id="designPreviewContainer">
+            <!-- Resulting SVG will show here -->
+          </div>
+
+          <div class="design-controls">
+            <div class="design-category-nav">
+              <div class="category-carousel" id="categoryCarousel">
+                <div class="category-strip" id="categoryStrip">
+                  <!-- Categories will be injected here -->
+                </div>
+              </div>
+            </div>
+
+            <div class="design-options-grid" id="designOptionsGrid">
+              <!-- Dynamically populated based on active tab -->
+            </div>
+          </div>
+
+          <div class="editor-actions">
+            <button type="button" class="btn-cancel" id="btnCancelDesign">Back</button>
+            <button type="button" class="btn-primary" id="btnSaveDesign">
+              <span class="btn-text">Equip</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="pfp-view" id="pfpAiView" hidden>
+          <p class="sidebar-sub">AI Vibe Check</p>
+          <div class="ai-form">
+            <label class="field">
+              <span class="label">How do people usually describe you?</span>
+              <select id="aiVibe" class="ai-select">
+                <option value="chill">Calm and laid-back</option>
+                <option value="energetic">Loud and full of energy</option>
+                <option value="mysterious">Quiet and hard to read</option>
+                <option value="happy">Always smiling, warm presence</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="label">Your typical weekend looks like...</span>
+              <select id="aiAnimal" class="ai-select">
+                <option value="cat">Staying in, cozy and chill</option>
+                <option value="owl">Up late, deep conversations</option>
+                <option value="lion">Out with friends, making noise</option>
+                <option value="fox">Somewhere spontaneous and new</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="label">Your style preference?</span>
+              <div class="ai-radio-group">
+                <label><input type="radio" name="aiStyle" value="minimal" checked> Minimal</label>
+                <label><input type="radio" name="aiStyle" value="extra"> Extra</label>
+              </div>
+            </label>
+          </div>
+          <div class="editor-actions">
+            <button type="button" class="btn-cancel" id="btnCancelAi">Back</button>
+            <button type="button" class="btn-primary" id="btnGenerateAi">
+              <span class="btn-text">Generate</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="pfp-view" id="pfpEditView" hidden>
+          <div class="editor-canvas-wrap" id="editorCanvasWrap">
+            <!-- Used div for clipping the preview correctly -->
+            <canvas id="editorCanvas"></canvas>
+            <div class="editor-overlay"></div>
+          </div>
+
+          <div class="editor-controls">
+            <button type="button" class="cal-nav" id="btnRotateC" aria-label="Rotate Clockwise" title="Rotate">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 12a9 9 0 11-9-9c2.52 0 4.93 1 6.74 2.74L21 8" stroke="currentColor" stroke-width="2.25"
+                  stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M21 3v5h-5" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <button type="button" class="cal-nav" id="btnFlipH" aria-label="Flip Horizontally" title="Flip">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3v18m-5-3l-4-6 4-6m10 12l4-6-4-6" stroke="currentColor" stroke-width="2.25"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="editor-sliders">
+            <label class="range-field">
+              <div class="range-labels">
+                <span class="range-label">Brightness</span>
+              </div>
+              <input type="range" class="slider" id="valBrightness" min="50" max="150" value="100" />
+            </label>
+            <label class="range-field">
+              <div class="range-labels">
+                <span class="range-label">Contrast</span>
+              </div>
+              <input type="range" class="slider" id="valContrast" min="50" max="150" value="100" />
+            </label>
+          </div>
+
+          <div class="editor-actions">
+            <button type="button" class="btn-cancel" id="btnCancelEdit">Cancel</button>
+            <button type="button" class="btn-primary" id="btnSaveEdit">
+              <span class="btn-text">Apply</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" aria-hidden="true"></div>
+  </main>
+
+  <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
+  <script src="mascot/responses.js"></script>
+  <script src="mascot/sam.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
