@@ -1293,6 +1293,18 @@
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
 
+  // Track last mouse position for idle eye movement
+  let lastMouseX = window.innerWidth / 2;
+  let lastMouseY = window.innerHeight / 2;
+  let idleTime = 0;
+  let blinkTimer = 0;
+  let nextBlinkTime = 2000 + Math.random() * 2000;
+  let isBlinking = false;
+  let idleTargetX = 0;
+  let idleTargetY = 0;
+  let idleEyeX = 0;
+  let idleEyeY = 0;
+
   function pupilFollow(e) {
     if (reduceMotion || !eyeL || !eyeR) return;
     const rect = face.getBoundingClientRect();
@@ -1305,9 +1317,84 @@
     const py = Math.max(-max, Math.min(max, dy * max));
     eyeL.style.transform = `translate(${px}px, ${py}px)`;
     eyeR.style.transform = `translate(${px}px, ${py}px)`;
+    
+    // Update last mouse position
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+    idleTime = 0;
   }
 
-  document.addEventListener("mousemove", pupilFollow);
+  // Idle eye movement animation - runs continuously for realistic eye behavior
+  function idleEyeAnimation(timestamp) {
+    if (reduceMotion || !eyeL || !eyeR || !face) {
+      requestAnimationFrame(idleEyeAnimation);
+      return;
+    }
+
+    idleTime += 16; // Approximate ms per frame
+    
+    // Blinking logic
+    blinkTimer += 16;
+    if (!isBlinking && blinkTimer > nextBlinkTime) {
+      isBlinking = true;
+      // Quick blink down
+      eyeL.style.transform += ' scaleY(0.1)';
+      eyeR.style.transform += ' scaleY(0.1)';
+      
+      // Open after 100-150ms
+      setTimeout(() => {
+        isBlinking = false;
+        blinkTimer = 0;
+        nextBlinkTime = 2000 + Math.random() * 3000; // Next blink in 2-5 seconds
+      }, 100 + Math.random() * 50);
+    }
+    
+    // Micro-movements when idle (no mouse movement for 500ms+)
+    if (idleTime > 500 && !isBlinking) {
+      const rect = face.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      
+      // Calculate base position from last mouse position
+      const baseDx = (lastMouseX - cx) / (rect.width * 1.2);
+      const baseDy = (lastMouseY - cy) / (rect.height * 1.2);
+      const max = 4;
+      const basePx = Math.max(-max, Math.min(max, baseDx * max));
+      const basePy = Math.max(-max, Math.min(max, baseDy * max));
+      
+      // Add subtle idle variation using sine waves for natural movement
+      const time = timestamp || Date.now();
+      const microMoveX = Math.sin(time * 0.001) * 0.5 + Math.sin(time * 0.0023) * 0.3;
+      const microMoveY = Math.cos(time * 0.0015) * 0.5 + Math.sin(time * 0.0017) * 0.2;
+      
+      // Occasional small saccade (quick eye jump) every 3-8 seconds
+      const saccadeInterval = 6000;
+      const saccadePhase = Math.floor(time / saccadeInterval);
+      const saccadeTime = (time % saccadeInterval) / saccadeInterval;
+      let saccadeX = 0, saccadeY = 0;
+      
+      if (saccadeTime > 0.95) { // Quick jump near end of interval
+        const jumpProgress = (saccadeTime - 0.95) / 0.05;
+        saccadeX = Math.sin(saccadePhase) * 1.5 * jumpProgress;
+        saccadeY = Math.cos(saccadePhase * 1.3) * 1.5 * jumpProgress;
+      } else if (saccadeTime < 0.05) { // Return from jump
+        const returnProgress = 1 - (saccadeTime / 0.05);
+        saccadeX = Math.sin(saccadePhase) * 1.5 * returnProgress;
+        saccadeY = Math.cos(saccadePhase * 1.3) * 1.5 * returnProgress;
+      }
+      
+      const finalX = basePx + microMoveX + saccadeX;
+      const finalY = basePy + microMoveY + saccadeY;
+      
+      eyeL.style.transform = `translate(${finalX}px, ${finalY}px)`;
+      eyeR.style.transform = `translate(${finalX}px, ${finalY}px)`;
+    }
+    
+    requestAnimationFrame(idleEyeAnimation);
+  }
+  
+  // Start the idle animation loop
+  requestAnimationFrame(idleEyeAnimation);
 
   if (!reduceMotion && card) {
     document.addEventListener("mousemove", (e) => {
