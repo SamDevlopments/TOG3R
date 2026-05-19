@@ -1,0 +1,1917 @@
+/* ==========================================================================
+   Sam - Isolated Mascot Styles (Body, Face, Eyes, Hands & Exaggerated Poses)
+   ========================================================================== */
+
+@keyframes mascot-rise {
+  from {
+    opacity: 0;
+    transform: translateZ(40px) translateY(100px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(40px) translateY(0) scale(1);
+  }
+}
+
+@keyframes mascot-idle {
+  0%, 100% {
+    box-shadow: 0 8px 0 rgba(255, 140, 180, 0.15), 0 12px 24px rgba(200, 100, 140, 0.12);
+  }
+  50% {
+    box-shadow: 0 10px 0 rgba(255, 140, 180, 0.22), 0 16px 30px rgba(200, 100, 140, 0.18);
+  }
+}
+
+.mascot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: -8px auto 24px;
+  transform: translateZ(40px);
+  animation: mascot-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: 0.08s;
+  position: relative;
+  cursor: pointer;
+}
+
+.mascot-face {
+  width: 88px;
+  height: 72px;
+  background: linear-gradient(180deg, #ffeef6 0%, #ffd6ea 100%);
+  border-radius: 50% 50% 48% 48% / 60% 60% 40% 40%;
+  position: relative;
+  box-shadow: 0 8px 0 rgba(255, 140, 180, 0.15), 0 12px 24px rgba(200, 100, 140, 0.12);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Face Poses & Wiggles (Base Head Shape & Animations) */
+.mascot-face:not(.happy):not(.sad):not(.angry):not(.nervous):not(.cute):not(.shocked):not(.evil):not(.think):not(.worry):not(.hype):not(.minecraft):not(.derp):not(.cats):not(.wink):not(.dizzy):not(.cool):not(.rage):not(.starry) {
+  animation: mascot-idle 5s ease-in-out infinite;
+}
+
+.mascot-face.happy {
+  animation: bounce 0.5s ease;
+}
+
+.mascot-face.sad {
+  transform: rotate(-4deg) scale(0.98);
+}
+
+.mascot-face.angry {
+  animation: angry-shake 0.15s ease infinite;
+}
+
+@keyframes angry-shake {
+  0%, 100% { transform: scale(1.02) rotate(1.5deg); }
+  50% { transform: scale(1.02) rotate(-1.5deg); }
+}
+
+.mascot-face.nervous {
+  animation: nervous-tremble 0.08s ease infinite;
+}
+
+@keyframes nervous-tremble {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(0.8px, -0.8px); }
+  50% { transform: translate(-0.8px, 0.8px); }
+  75% { transform: translate(0.8px, 0.8px); }
+}
+
+.mascot-face.cute {
+  animation: cute-wiggle 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes cute-wiggle {
+  0% { transform: scale(1.04) rotate(-3deg); }
+  100% { transform: scale(1.04) rotate(3deg); }
+}
+
+.mascot-face.smug {
+  transform: rotate(6deg) translateY(-2px) scale(1.02);
+}
+
+.mascot-face.shocked {
+  animation: shock-stretch 0.12s ease infinite alternate;
+  background: linear-gradient(180deg, #b3e5fc 0%, #ffd6ea 100%);
+}
+
+@keyframes shock-stretch {
+  0% { transform: scaleX(0.9) scaleY(1.1) translateY(-2px); }
+  100% { transform: scaleX(0.94) scaleY(1.06) translateY(2px); }
+}
+
+.mascot-face.evil {
+  animation: evil-wobble 0.25s linear infinite;
+}
+
+@keyframes evil-wobble {
+  0% { transform: scale(1.03) rotate(-1.5deg); }
+  50% { transform: scale(1.03) rotate(1.5deg) translateY(-1px); }
+  100% { transform: scale(1.03) rotate(-1.5deg); }
+}
+
+.mascot-face.bored {
+  transform: translateY(3px) scaleY(0.96);
+}
+
+.mascot-face.think {
+  transform: rotate(-6deg) translateY(-2px);
+}
+
+.mascot-face.worry {
+  transform: translateY(4px) scale(0.96);
+  animation: worry-quiver 0.15s ease infinite alternate;
+}
+
+@keyframes worry-quiver {
+  0% { transform: translateY(4px) scale(0.96) rotate(-0.5deg); }
+  100% { transform: translateY(4px) scale(0.96) rotate(0.5deg); }
+}
+
+.mascot-face.hype {
+  animation: hype-bounce 0.18s ease infinite alternate;
+}
+
+@keyframes hype-bounce {
+  0% { transform: scale(1.05) translateY(0); }
+  100% { transform: scale(1.05) translateY(-5px); }
+}
+
+.mascot-face.squint {
+  animation: squint-wobble 0.1s linear infinite alternate;
+}
+@keyframes squint-wobble {
+  0% { transform: translateY(0) scale(0.98); }
+  100% { transform: translateY(2px) scale(0.98); }
+}
+
+.mascot-face.derp {
+  animation: derp-wobble 0.2s linear infinite;
+}
+
+@keyframes derp-wobble {
+  0% { transform: scale(1.05) rotate(-3deg) translateY(0); }
+  50% { transform: scale(1.05) rotate(3deg) translateY(-2px); }
+  100% { transform: scale(1.05) rotate(-3deg) translateY(0); }
+}
+
+.mascot-face.cats {
+  animation: cute-wiggle 1s ease-in-out infinite alternate;
+}
+
+.mascot-face.cats::before {
+  content: "";
+  position: absolute;
+  bottom: 85%;
+  left: 4px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 20px solid #ffd6ea;
+  border-radius: 4px;
+  transform: rotate(-18deg);
+  z-index: -1;
+  filter: drop-shadow(0 2.2px 0 var(--ink));
+}
+
+.mascot-face.cats::after {
+  content: "";
+  position: absolute;
+  bottom: 85%;
+  right: 4px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 20px solid #ffd6ea;
+  border-radius: 4px;
+  transform: rotate(18deg);
+  z-index: -1;
+  filter: drop-shadow(0 2.2px 0 var(--ink));
+}
+
+.mascot-face.wink {
+  transform: rotate(5deg) scale(1.03);
+}
+
+.mascot-face.dizzy {
+  animation: woozy-orbit 2s linear infinite;
+}
+
+@keyframes woozy-orbit {
+  0% { transform: rotate(0deg) translate(0, 0); }
+  25% { transform: rotate(3deg) translate(1px, -2px); }
+  50% { transform: rotate(-3deg) translate(-1px, 2px); }
+  75% { transform: rotate(2deg) translate(2px, 1px); }
+  100% { transform: rotate(0deg) translate(0, 0); }
+}
+
+.mascot-face.cool {
+  transform: rotate(-3deg) scale(1.04);
+}
+
+/* Retro cool sunglasses */
+.mascot-face.eyes-cool::before {
+  content: "";
+  position: absolute;
+  width: 72px;
+  height: 18px;
+  background: var(--ink);
+  top: 27px;
+  left: 8px;
+  border-radius: 4px 4px 10px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  z-index: 8;
+}
+
+.mascot-face.eyes-cool::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 4px;
+  background: var(--ink);
+  top: 31px;
+  left: 38px;
+  z-index: 9;
+}
+
+.mascot-face.rage {
+  background: linear-gradient(180deg, #ff4c4c 0%, #c62828 100%) !important;
+  animation: intense-quake 0.08s ease infinite alternate;
+}
+
+.mascot-face.starry {
+  animation: starry-bounce 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes starry-bounce {
+  0% { transform: scale(1.03) translateY(0); }
+  100% { transform: scale(1.03) translateY(-4px); }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.08) translateY(-4px);
+  }
+  70% {
+    transform: scale(1.02);
+  }
+}
+
+
+/* ==========================================================================
+   Eye Elements & Modular Eye Expression Classes
+   ========================================================================== */
+
+.eye {
+  position: absolute;
+  width: 18px;
+  height: 22px;
+  background: var(--ink);
+  border-radius: 50%;
+  top: 26px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.eye.left {
+  left: 22px;
+}
+
+.eye.right {
+  right: 22px;
+}
+
+.eye .pupil {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  top: 5px;
+  left: 5px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Cute (UwU ^_^) Eyes */
+.mascot-face.eyes-cute .eye {
+  height: 8px;
+  background: transparent;
+  border-radius: 0;
+  border: 3.5px solid var(--ink);
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 50% 50% 0 0;
+  top: 31px;
+  overflow: visible;
+}
+
+.mascot-face.eyes-cute .eye .pupil {
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* Smug (😏) Eyes */
+.mascot-face.eyes-smug .eye {
+  height: 14px;
+  top: 30px;
+  border-radius: 50% 50% 0 0;
+}
+
+.mascot-face.eyes-smug .eye.left .pupil {
+  transform: translateY(1px) translateX(2px);
+}
+
+.mascot-face.eyes-smug .eye.right .pupil {
+  transform: translateY(1px) translateX(2px);
+}
+
+/* Shocked (😱) Eyes */
+.mascot-face.eyes-shocked .eye {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  top: 21px;
+}
+
+.mascot-face.eyes-shocked .eye.left {
+  left: 19px;
+}
+
+.mascot-face.eyes-shocked .eye.right {
+  right: 19px;
+}
+
+.mascot-face.eyes-shocked .eye .pupil {
+  width: 6px;
+  height: 6px;
+  top: 9px;
+  left: 9px;
+}
+
+/* Evil Glare (😈) Eyes */
+.mascot-face.eyes-evil .eye {
+  height: 13px;
+  top: 31px;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  transform: scaleY(-1);
+}
+
+.mascot-face.eyes-evil .eye .pupil {
+  top: 2px;
+  transform: scale(0.9);
+}
+
+/* Bored (😑) Eyes */
+.mascot-face.eyes-bored .eye {
+  height: 4px;
+  top: 34px;
+  border-radius: 2px;
+}
+
+.mascot-face.eyes-bored .eye .pupil {
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* Thinking (🤔) Eyes */
+.mascot-face.eyes-think .eye .pupil {
+  transform: translateY(-4px) translateX(-3px);
+}
+
+/* Worried Watery (🥺) Eyes */
+.mascot-face.eyes-worry .eye {
+  width: 20px;
+  height: 24px;
+  border-radius: 48%;
+  top: 24px;
+}
+
+.mascot-face.eyes-worry .eye .pupil {
+  width: 12px;
+  height: 12px;
+  top: 2px;
+  left: 2px;
+  box-shadow: inset 1.5px 1.5px 0 white, 2.5px 2.5px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Hype Star (🤩) Eyes */
+.mascot-face.eyes-hype .eye {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  top: 24px;
+  background: #ffeb3b;
+  border: 2.2px solid var(--ink);
+}
+
+.mascot-face.eyes-hype .eye .pupil {
+  width: 10px;
+  height: 10px;
+  top: 4px;
+  left: 4px;
+  background: var(--ink);
+  border-radius: 0;
+  transform: rotate(45deg) scale(1.15);
+}
+
+/* Squint (><) Eyes */
+.mascot-face.eyes-squint .eye {
+  background: transparent;
+  border-radius: 0;
+  width: 14px;
+  height: 14px;
+  border: 4px solid var(--ink);
+  top: 30px;
+}
+
+.mascot-face.eyes-squint .eye.left {
+  border-bottom: none;
+  border-left: none;
+  transform: rotate(45deg);
+  left: 20px;
+}
+
+.mascot-face.eyes-squint .eye.right {
+  border-bottom: none;
+  border-right: none;
+  transform: rotate(-45deg);
+  right: 20px;
+}
+
+.mascot-face.eyes-squint .eye .pupil {
+  display: none;
+}
+
+/* Derpy Asymmetric Eyes */
+.mascot-face.eyes-derp .eye.left .pupil {
+  transform: translateY(-8px) translateX(-4px) scale(0.8);
+}
+
+.mascot-face.eyes-derp .eye.right .pupil {
+  transform: translateY(8px) translateX(4px) scale(0.8);
+}
+
+/* Kawaii Cats Neko Squinty Eyes */
+.mascot-face.eyes-cats .eye {
+  height: 8px;
+  background: transparent;
+  border-radius: 0;
+  border: 3.5px solid var(--ink);
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 50% 50% 0 0;
+  top: 31px;
+  overflow: visible;
+}
+
+.mascot-face.eyes-cats .eye .pupil {
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* Sassy Anime Winking Eyes */
+.mascot-face.eyes-wink .eye.left {
+  height: 5px;
+  background: transparent;
+  border-radius: 0;
+  border: 3.5px solid var(--ink);
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 50% 50% 0 0;
+  top: 34px;
+  overflow: visible;
+}
+
+.mascot-face.eyes-wink .eye.left .pupil {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.mascot-face.eyes-wink .eye.right {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  top: 24px;
+}
+
+.mascot-face.eyes-wink .eye.right .pupil {
+  width: 9px;
+  height: 9px;
+  top: 5px;
+  left: 5px;
+}
+
+/* Dizzy X Cross Eyes */
+.mascot-face.eyes-dizzy .eye {
+  width: 18px;
+  height: 18px;
+  background: transparent;
+  border-radius: 0;
+  top: 28px;
+  overflow: visible;
+  border: none;
+}
+
+.mascot-face.eyes-dizzy .eye::before,
+.mascot-face.eyes-dizzy .eye::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 3px;
+  background: var(--ink);
+  top: 8px;
+  left: 0;
+}
+
+.mascot-face.eyes-dizzy .eye::before { transform: rotate(45deg); }
+.mascot-face.eyes-dizzy .eye::after { transform: rotate(-45deg); }
+.mascot-face.eyes-dizzy .eye .pupil { display: none; }
+
+/* Cool Sunglasses with visible eyes */
+.mascot-face.eyes-cool .eye {
+  opacity: 1;
+  transform: scale(1);
+  background: white;
+  height: 4px;
+  top: 34px;
+  z-index: 10;
+  border-radius: 2px;
+}
+
+.mascot-face.eyes-cool .eye .pupil {
+  display: none;
+}
+
+/* Rage Fiery glare eyes */
+.mascot-face.eyes-rage .eye {
+  height: 12px;
+  top: 31px;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  transform: scaleY(-1);
+  background: #ffeb3b;
+}
+
+.mascot-face.eyes-rage .eye .pupil {
+  background: #b71c1c;
+  transform: scale(0.9);
+}
+
+/* Star-Struck Teal/Neon glowing starry eyes */
+.mascot-face.eyes-starry .eye {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  top: 24px;
+  background: #00e5ff;
+  border: 2.2px solid var(--ink);
+}
+
+.mascot-face.eyes-starry .eye .pupil {
+  width: 12px;
+  height: 12px;
+  top: 3px;
+  left: 3px;
+  background: white;
+  border-radius: 0;
+  transform: rotate(45deg) scale(1.2);
+  box-shadow: 0 0 10px white;
+  animation: spin-star 4s linear infinite;
+}
+
+@keyframes spin-star {
+  from { transform: rotate(45deg); }
+  to { transform: rotate(405deg); }
+}
+
+
+/* ==========================================================================
+   Blush Elements & Blushing Class Modifiers
+   ========================================================================== */
+
+.blush {
+  position: absolute;
+  width: 16px;
+  height: 8px;
+  background: var(--pink);
+  border-radius: 50%;
+  opacity: 0.45;
+  top: 44px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.blush.left {
+  left: 12px;
+}
+
+.blush.right {
+  right: 12px;
+}
+
+.mascot-face.blush-cute .blush {
+  opacity: 0.85;
+  background: #ff5e97;
+  transform: scale(1.3);
+}
+
+.mascot-face.blush-shocked .blush {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.mascot-face.blush-hype .blush {
+  opacity: 0.75;
+  background: #ff4a80;
+  transform: scale(1.2);
+}
+
+.mascot-face.blush-squint .blush {
+  opacity: 0.9;
+  background: #ff5e97;
+}
+
+.mascot-face.blush-cats .blush {
+  opacity: 0.8;
+  background: #ff5e97;
+}
+
+.mascot-face.blush-cool .blush {
+  opacity: 0;
+}
+
+.mascot-face.blush-rage .blush {
+  opacity: 0;
+}
+
+.mascot-face.blush-starry .blush {
+  opacity: 0.8;
+  background: #ff5e97;
+}
+
+
+/* ==========================================================================
+   Mouth Formations & Mouth Expression Classes
+   ========================================================================== */
+
+.mouth {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  width: 22px;
+  height: 12px;
+  border: 3px solid transparent;
+  border-bottom-color: var(--ink);
+  border-radius: 0 0 50% 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mascot-face.mouth-sad .mouth {
+  border-bottom-color: transparent;
+  border-top-color: var(--ink);
+  border-radius: 50% 50% 0 0;
+  bottom: 12px;
+  width: 18px;
+  height: 10px;
+}
+
+.mascot-face.mouth-angry .mouth {
+  border-bottom-color: transparent;
+  border-top-color: var(--ink);
+  border-radius: 50% 50% 0 0;
+  bottom: 12px;
+  width: 20px;
+  height: 6px;
+}
+
+.mascot-face.mouth-nervous .mouth {
+  width: 12px;
+  height: 12px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  bottom: 12px;
+}
+
+/* Cute Cat Mouth (:3) */
+.mascot-face.mouth-cute .mouth {
+  width: 14px;
+  height: 10px;
+  border: none;
+  background: transparent;
+}
+
+.mascot-face.mouth-cute .mouth::before,
+.mascot-face.mouth-cute .mouth::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 2.2px solid var(--ink);
+  border-top: none;
+  border-radius: 0 0 50% 50%;
+  background: #ffd6ea;
+  transition: all 0.3s ease;
+}
+
+.mascot-face.mouth-cute .mouth::before { left: -1px; }
+.mascot-face.mouth-cute .mouth::after { left: 5px; }
+
+/* Smug Crooked Smirk (😏) */
+.mascot-face.mouth-smug .mouth {
+  width: 20px;
+  height: 8px;
+  border-bottom: 3.2px solid var(--ink);
+  border-radius: 0 0 50% 10%;
+  transform: translateX(-50%) rotate(-8deg);
+  bottom: 15px;
+}
+
+/* Shocked Open Gasp (😱) */
+.mascot-face.mouth-shocked .mouth {
+  width: 24px;
+  height: 22px;
+  background: var(--ink);
+  border-radius: 50%;
+  bottom: 8px;
+  border: none;
+}
+
+/* Evil Wicked Grin (😈) */
+.mascot-face.mouth-evil .mouth {
+  width: 28px;
+  height: 14px;
+  border: 3px solid transparent;
+  border-bottom-color: var(--ink);
+  border-radius: 0 0 50% 50%;
+  bottom: 10px;
+}
+
+/* Bored Straight Meh (😑) */
+.mascot-face.mouth-bored .mouth {
+  width: 18px;
+  height: 3px;
+  background: var(--ink);
+  border: none;
+  border-radius: 2px;
+  bottom: 16px;
+}
+
+/* Thinking (🤔) Mouth Curve */
+.mascot-face.mouth-think .mouth {
+  width: 14px;
+  height: 5px;
+  border: 2.5px solid var(--ink);
+  border-radius: 50% 50% 0 0;
+  border-bottom: none;
+  transform: translateX(-50%) rotate(8deg);
+  bottom: 16px;
+}
+
+/* Worried (🥺) Downturned Mouth */
+.mascot-face.mouth-worry .mouth {
+  border-bottom-color: transparent;
+  border-top-color: var(--ink);
+  border-radius: 50% 50% 0 0;
+  bottom: 12px;
+  width: 16px;
+  height: 8px;
+}
+
+/* Hype Laughing Mouth (🤩) with Tongue */
+.mascot-face.mouth-hype .mouth {
+  width: 30px;
+  height: 18px;
+  background: #ff4a80;
+  border: 2.5px solid var(--ink);
+  border-radius: 0 0 50% 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+}
+
+.mascot-face.mouth-hype .mouth::before {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 8px;
+  background: #ff85a7;
+  border-radius: 50% 50% 0 0;
+  bottom: 0;
+  left: 5px;
+}
+
+.mascot-face.mouth-squint .mouth {
+  width: 12px;
+  height: 8px;
+  border: 3.5px solid var(--ink);
+  border-top: none;
+  border-right: none;
+  border-radius: 0 0 0 100%;
+  transform: translateX(-50%) rotate(-45deg);
+  bottom: 14px;
+  background: transparent;
+}
+
+/* Derpy goofy tongue */
+.mascot-face.mouth-derp .mouth {
+  width: 18px;
+  height: 12px;
+  background: var(--ink);
+  border: none;
+  border-radius: 50% 50% 0 0;
+  transform: translateX(-50%) rotate(15deg);
+  bottom: 12px;
+}
+
+.mascot-face.mouth-derp .mouth::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 8px;
+  background: #ff5252;
+  border-radius: 0 0 4px 4px;
+  top: 8px;
+  left: 4px;
+  z-index: 5;
+}
+
+/* Cats Double Curve :3 */
+.mascot-face.mouth-cats .mouth {
+  width: 14px;
+  height: 10px;
+  border: none;
+  background: transparent;
+}
+
+.mascot-face.mouth-cats .mouth::before,
+.mascot-face.mouth-cats .mouth::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 2.2px solid var(--ink);
+  border-top: none;
+  border-radius: 0 0 50% 50%;
+  background: #ffd6ea;
+}
+
+.mascot-face.mouth-cats .mouth::before { left: -1px; }
+.mascot-face.mouth-cats .mouth::after { left: 5px; }
+
+/* Sassy Anime laugh smirk */
+.mascot-face.mouth-wink .mouth {
+  width: 20px;
+  height: 12px;
+  border-bottom-color: var(--ink);
+  border-radius: 0 0 50% 50%;
+  bottom: 12px;
+  transform: translateX(-50%) rotate(-5deg);
+}
+
+/* Dizzy quivering wavy mouth */
+.mascot-face.mouth-dizzy .mouth {
+  width: 22px;
+  height: 6px;
+  border: none;
+  background: transparent;
+  bottom: 16px;
+}
+
+.mascot-face.mouth-dizzy .mouth::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background: var(--ink);
+  border-radius: 2px;
+  animation: wavy-mouth 0.2s linear infinite alternate;
+}
+
+/* Cool smug smile */
+.mascot-face.mouth-cool .mouth {
+  width: 22px;
+  height: 8px;
+  border-bottom: 3.5px solid var(--ink);
+  border-radius: 0 0 50% 20%;
+  transform: translateX(-50%) rotate(-6deg);
+  bottom: 14px;
+}
+
+/* Rage gritted teeth box */
+.mascot-face.mouth-rage .mouth {
+  width: 28px;
+  height: 14px;
+  background: #ffeb3b;
+  border: 3.2px solid var(--ink);
+  border-radius: 4px;
+  bottom: 8px;
+  transform: translateX(-50%);
+}
+
+.mascot-face.mouth-rage .mouth::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2.2px;
+  background: var(--ink);
+  top: 5px;
+  left: 0;
+}
+
+/* Starry Anime excited open curve */
+.mascot-face.mouth-starry .mouth {
+  width: 26px;
+  height: 14px;
+  background: #ff4a80;
+  border: 2.5px solid var(--ink);
+  border-radius: 0 0 50% 50%;
+  bottom: 10px;
+}
+
+
+/* ==========================================================================
+   Eyebrows & Modular Eyebrow Expression Classes
+   ========================================================================== */
+
+.eyebrow {
+  position: absolute;
+  width: 14px;
+  height: 3px;
+  background: var(--ink);
+  border-radius: 2px;
+  top: 18px;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.eyebrow.left {
+  left: 24px;
+}
+
+.eyebrow.right {
+  right: 24px;
+}
+
+.mascot-face.eyebrows-angry .eyebrow {
+  opacity: 1;
+}
+.mascot-face.eyebrows-angry .eyebrow.left {
+  transform: rotate(15deg) translateY(2px);
+}
+.mascot-face.eyebrows-angry .eyebrow.right {
+  transform: rotate(-15deg) translateY(2px);
+}
+
+.mascot-face.eyebrows-sad .eyebrow {
+  opacity: 0.85;
+}
+.mascot-face.eyebrows-sad .eyebrow.left {
+  transform: rotate(-12deg) translateY(-1px);
+}
+.mascot-face.eyebrows-sad .eyebrow.right {
+  transform: rotate(12deg) translateY(-1px);
+}
+
+.mascot-face.eyebrows-nervous .eyebrow {
+  opacity: 0.8;
+}
+.mascot-face.eyebrows-nervous .eyebrow.left {
+  transform: translateY(-4px) rotate(-5deg);
+}
+.mascot-face.eyebrows-nervous .eyebrow.right {
+  transform: translateY(-4px) rotate(5deg);
+}
+
+.mascot-face.eyebrows-happy .eyebrow {
+  opacity: 0.8;
+}
+.mascot-face.eyebrows-happy .eyebrow.left {
+  transform: translateY(-3px) rotate(-8deg);
+}
+.mascot-face.eyebrows-happy .eyebrow.right {
+  transform: translateY(-3px) rotate(8deg);
+}
+
+/* Cute Eyebrows */
+.mascot-face.eyebrows-cute .eyebrow {
+  opacity: 0.95;
+}
+.mascot-face.eyebrows-cute .eyebrow.left {
+  transform: translateY(-2px) rotate(8deg);
+}
+.mascot-face.eyebrows-cute .eyebrow.right {
+  transform: translateY(-2px) rotate(-8deg);
+}
+
+/* Smug (😏) Eyebrows */
+.mascot-face.eyebrows-smug .eyebrow {
+  opacity: 1;
+}
+.mascot-face.eyebrows-smug .eyebrow.left {
+  transform: translateY(-6px) rotate(-12deg);
+}
+.mascot-face.eyebrows-smug .eyebrow.right {
+  transform: translateY(2px) rotate(12deg);
+}
+
+/* Shocked (😱) Eyebrows */
+.mascot-face.eyebrows-shocked .eyebrow {
+  opacity: 1;
+}
+.mascot-face.eyebrows-shocked .eyebrow.left {
+  transform: translateY(-8px) rotate(-15deg);
+}
+.mascot-face.eyebrows-shocked .eyebrow.right {
+  transform: translateY(-8px) rotate(15deg);
+}
+
+/* Evil (😈) Eyebrows */
+.mascot-face.eyebrows-evil .eyebrow {
+  opacity: 1;
+}
+.mascot-face.eyebrows-evil .eyebrow.left {
+  transform: translateY(3px) rotate(28deg);
+}
+.mascot-face.eyebrows-evil .eyebrow.right {
+  transform: translateY(3px) rotate(-28deg);
+}
+
+/* Bored (😑) Eyebrows */
+.mascot-face.eyebrows-bored .eyebrow {
+  opacity: 0.7;
+  width: 16px;
+  height: 2.2px;
+}
+.mascot-face.eyebrows-bored .eyebrow.left {
+  transform: translateY(2px) rotate(0deg);
+}
+.mascot-face.eyebrows-bored .eyebrow.right {
+  transform: translateY(2px) rotate(0deg);
+}
+
+/* Thinking (🤔) Eyebrows */
+.mascot-face.eyebrows-think .eyebrow {
+  opacity: 1;
+}
+.mascot-face.eyebrows-think .eyebrow.left {
+  transform: translateY(-5px) rotate(-15deg);
+}
+.mascot-face.eyebrows-think .eyebrow.right {
+  transform: translateY(1px) rotate(10deg);
+}
+
+/* Worried (🥺) Eyebrows */
+.mascot-face.eyebrows-worry .eyebrow {
+  opacity: 1;
+}
+.mascot-face.eyebrows-worry .eyebrow.left {
+  transform: translateY(-5px) rotate(18deg);
+}
+.mascot-face.eyebrows-worry .eyebrow.right {
+  transform: translateY(-5px) rotate(-18deg);
+}
+
+/* Hype (🤩) Eyebrows */
+.mascot-face.eyebrows-hype .eyebrow {
+  opacity: 1;
+}
+.mascot-face.eyebrows-hype .eyebrow.left {
+  transform: translateY(-8px) rotate(-8deg);
+}
+.mascot-face.eyebrows-hype .eyebrow.right {
+  transform: translateY(-8px) rotate(8deg);
+}
+
+/* Squint (><) Eyebrows */
+.mascot-face.eyebrows-squint .eyebrow {
+  opacity: 1;
+}
+.mascot-face.eyebrows-squint .eyebrow.left { transform: translateY(-3px) rotate(25deg); }
+.mascot-face.eyebrows-squint .eyebrow.right { transform: translateY(-3px) rotate(-25deg); }
+
+/* Derpy goofy eyebrows asymmetric */
+.mascot-face.eyebrows-derp .eyebrow {
+  opacity: 1;
+}
+.mascot-face.eyebrows-derp .eyebrow.left { transform: translateY(-7px) rotate(15deg); }
+.mascot-face.eyebrows-derp .eyebrow.right { transform: translateY(2px) rotate(-20deg); }
+
+/* Cats cute eyebrows */
+.mascot-face.eyebrows-cats .eyebrow {
+  opacity: 0.9;
+}
+.mascot-face.eyebrows-cats .eyebrow.left { transform: translateY(-3px) rotate(6deg); }
+.mascot-face.eyebrows-cats .eyebrow.right { transform: translateY(-3px) rotate(-6deg); }
+
+/* Wink sassy brows */
+.mascot-face.eyebrows-wink .eyebrow {
+  opacity: 1;
+}
+.mascot-face.eyebrows-wink .eyebrow.left { transform: translateY(-3px) rotate(12deg); }
+.mascot-face.eyebrows-wink .eyebrow.right { transform: translateY(-6px) rotate(-5deg); }
+
+/* Dizzy swirling eyebrows */
+.mascot-face.eyebrows-dizzy .eyebrow {
+  opacity: 0.85;
+}
+.mascot-face.eyebrows-dizzy .eyebrow.left { transform: translateY(-3px) rotate(-12deg); }
+.mascot-face.eyebrows-dizzy .eyebrow.right { transform: translateY(-3px) rotate(12deg); }
+
+/* Cool eyebrows horizontal */
+.mascot-face.eyebrows-cool .eyebrow {
+  opacity: 0.75;
+}
+.mascot-face.eyebrows-cool .eyebrow.left { transform: translateY(-2px) rotate(-4deg); }
+.mascot-face.eyebrows-cool .eyebrow.right { transform: translateY(-2px) rotate(4deg); }
+
+/* Rage fiery yellow eyebrows */
+.mascot-face.eyebrows-rage .eyebrow {
+  opacity: 1;
+  height: 4px;
+  background: #ffeb3b;
+}
+.mascot-face.eyebrows-rage .eyebrow.left { transform: translateY(4px) rotate(32deg); }
+.mascot-face.eyebrows-rage .eyebrow.right { transform: translateY(4px) rotate(-32deg); }
+
+/* Starry excited eyebrows */
+.mascot-face.eyebrows-starry .eyebrow {
+  opacity: 0.95;
+}
+.mascot-face.eyebrows-starry .eyebrow.left { transform: translateY(-5px) rotate(-8deg); }
+.mascot-face.eyebrows-starry .eyebrow.right { transform: translateY(-5px) rotate(8deg); }
+
+
+/* ==========================================================================
+   Hands - Isolated and Exaggerated Hand Poses
+   ========================================================================== */
+
+.hand {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(180deg, #ffeef6 0%, #ffd6ea 100%);
+  border: 2.2px solid var(--ink);
+  border-radius: 50%;
+  top: 78px;
+  z-index: 5;
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+  transition: all 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Mitten thumb */
+.hand::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #ffd6ea;
+  border: 2.2px solid var(--ink);
+  border-radius: 50%;
+  top: 3px;
+}
+
+.hand.left::after {
+  right: -5px;
+  transform: rotate(20deg);
+}
+
+.hand.right::after {
+  left: -5px;
+  transform: rotate(-20deg);
+}
+
+/* Seamless merging overlay */
+.hand::before {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 9px;
+  background: #ffd6ea;
+  z-index: 6;
+  top: 4px;
+}
+
+.hand.left::before {
+  right: 0px;
+}
+
+.hand.right::before {
+  left: 0px;
+}
+
+.hand.left {
+  left: 6px;
+}
+
+.hand.right {
+  right: 6px;
+}
+
+/* Hover rises hands to interactive position */
+.mascot:hover .hand {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.mascot:hover .hand.left {
+  top: 64px;
+  left: -4px;
+}
+
+.mascot:hover .hand.right {
+  top: 64px;
+  right: -4px;
+}
+
+/* Hands emotional reactions */
+.mascot-face.hands-angry .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-angry .hand.left {
+  left: 2px;
+  top: 48px;
+  transform: scale(1.1) translateY(-2px);
+}
+.mascot-face.hands-angry .hand.right {
+  right: 2px;
+  top: 48px;
+  transform: scale(1.1) translateY(-2px);
+}
+
+.mascot-face.hands-sad .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-sad .hand.left {
+  left: 6px;
+  top: 68px;
+  transform: scale(0.9);
+}
+.mascot-face.hands-sad .hand.right {
+  right: 6px;
+  top: 68px;
+  transform: scale(0.9);
+}
+
+.mascot-face.hands-nervous .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-nervous .hand.left {
+  left: 4px;
+  top: 52px;
+  transform: scale(1);
+  animation: jitter-hand 0.08s ease infinite;
+}
+.mascot-face.hands-nervous .hand.right {
+  right: 4px;
+  top: 52px;
+  transform: scale(1);
+  animation: jitter-hand 0.08s ease infinite;
+}
+
+@keyframes jitter-hand {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-0.8px, 0.8px); }
+}
+
+.mascot-face.hands-happy .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-happy .hand.left {
+  left: -10px;
+  top: 48px;
+  transform: scale(1.15) rotate(-35deg);
+  animation: wave-hand-l 0.4s ease infinite alternate;
+}
+.mascot-face.hands-happy .hand.right {
+  right: -10px;
+  top: 48px;
+  transform: scale(1.15) rotate(35deg);
+  animation: wave-hand-r 0.4s ease infinite alternate;
+}
+
+@keyframes wave-hand-l {
+  0% { transform: scale(1.15) rotate(-20deg) translateY(0); }
+  100% { transform: scale(1.15) rotate(-40deg) translateY(-4px); }
+}
+
+@keyframes wave-hand-r {
+  0% { transform: scale(1.15) rotate(20deg) translateY(0); }
+  100% { transform: scale(1.15) rotate(40deg) translateY(-4px); }
+}
+
+/* Kawaii Cute Cheering Hands */
+.mascot-face.hands-cute .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-cute .hand.left {
+  left: 2px;
+  top: 36px;
+  transform: scale(1.1) rotate(15deg);
+  animation: cute-hand-l 0.6s ease infinite alternate;
+}
+.mascot-face.hands-cute .hand.right {
+  right: 2px;
+  top: 36px;
+  transform: scale(1.1) rotate(-15deg);
+  animation: cute-hand-r 0.6s ease infinite alternate;
+}
+
+/* Smug Cocky Roblox Hands */
+.mascot-face.hands-smug .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-smug .hand.left {
+  left: 8px;
+  top: 58px;
+  transform: scale(1.05) rotate(45deg);
+}
+.mascot-face.hands-smug .hand.right {
+  right: -8px;
+  top: 42px;
+  transform: scale(1.1) rotate(-20deg);
+  animation: smug-wave 0.5s ease infinite alternate;
+}
+
+@keyframes smug-wave {
+  from { transform: scale(1.1) rotate(-10deg); }
+  to { transform: scale(1.1) rotate(-30deg); }
+}
+
+/* Shocked Gasping Face Clutching Hands */
+.mascot-face.hands-shocked .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-shocked .hand.left {
+  left: -4px;
+  top: 36px;
+  transform: scale(1.15) rotate(45deg);
+}
+.mascot-face.hands-shocked .hand.right {
+  right: -4px;
+  top: 36px;
+  transform: scale(1.15) rotate(-45deg);
+}
+
+/* Evil Devious Rubbing Hands */
+.mascot-face.hands-evil .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-evil .hand.left {
+  left: 20px;
+  top: 56px;
+  transform: scale(1.1) rotate(65deg);
+  animation: rub-hand-l 0.3s linear infinite alternate;
+}
+.mascot-face.hands-evil .hand.right {
+  right: 20px;
+  top: 56px;
+  transform: scale(1.1) rotate(-65deg);
+  animation: rub-hand-r 0.3s linear infinite alternate;
+}
+
+@keyframes rub-hand-l {
+  from { transform: scale(1.1) rotate(60deg) translateX(0); }
+  to { transform: scale(1.1) rotate(70deg) translateX(2px); }
+}
+@keyframes rub-hand-r {
+  from { transform: scale(1.1) rotate(-60deg) translateX(0); }
+  to { transform: scale(1.1) rotate(-70deg) translateX(-2px); }
+}
+
+/* Bored lifelessly hanging hands */
+.mascot-face.hands-bored .hand {
+  opacity: 0.75;
+  pointer-events: auto;
+}
+.mascot-face.hands-bored .hand.left {
+  left: 8px;
+  top: 76px;
+  transform: scale(0.9) rotate(0deg);
+}
+.mascot-face.hands-bored .hand.right {
+  right: 8px;
+  top: 76px;
+  transform: scale(0.9) rotate(0deg);
+}
+
+/* Thinking Hand-Scratching Chin Pose */
+.mascot-face.hands-think .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-think .hand.left {
+  left: 18px;
+  top: 48px;
+  transform: scale(1.15) rotate(70deg);
+}
+.mascot-face.hands-think .hand.right {
+  right: 8px;
+  top: 66px;
+  transform: scale(0.9) rotate(-10deg);
+}
+
+/* Worried Clasping Hands */
+.mascot-face.hands-worry .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-worry .hand.left {
+  left: 20px;
+  top: 54px;
+  transform: scale(1.05) rotate(25deg);
+  animation: worry-hands-tremble 0.08s ease infinite alternate;
+}
+.mascot-face.hands-worry .hand.right {
+  right: 20px;
+  top: 54px;
+  transform: scale(1.05) rotate(-25deg);
+  animation: worry-hands-tremble-r 0.08s ease infinite alternate;
+}
+
+/* Hype Flying Waving Hands */
+.mascot-face.hands-hype .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-hype .hand.left {
+  left: -12px;
+  top: 36px;
+  transform: scale(1.2) rotate(-45deg);
+  animation: hype-wave-l 0.15s ease infinite alternate;
+}
+.mascot-face.hands-hype .hand.right {
+  right: -12px;
+  top: 36px;
+  transform: scale(1.2) rotate(45deg);
+  animation: hype-wave-r 0.15s ease infinite alternate;
+}
+
+/* Squint Hands clutching face */
+.mascot-face.hands-squint .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-squint .hand.left {
+  left: 8px;
+  top: 50px;
+  transform: scale(1.1) rotate(45deg);
+  animation: worry-hands-tremble 0.1s ease infinite alternate;
+}
+.mascot-face.hands-squint .hand.right {
+  right: 8px;
+  top: 50px;
+  transform: scale(1.1) rotate(-45deg);
+  animation: worry-hands-tremble-r 0.1s ease infinite alternate;
+}
+
+/* Derpy crazy asymmetric arms flapping */
+.mascot-face.hands-derp .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-derp .hand.left {
+  left: -14px;
+  top: 52px;
+  transform: scale(1.1) rotate(-65deg);
+}
+.mascot-face.hands-derp .hand.right {
+  right: -14px;
+  top: 64px;
+  transform: scale(1.1) rotate(65deg);
+}
+
+/* Neko cat paws raised near face */
+.mascot-face.hands-cats .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-cats .hand.left {
+  left: -2px;
+  top: 42px;
+  transform: scale(1.1) rotate(25deg);
+  animation: neko-paws-l 0.4s ease infinite alternate;
+}
+.mascot-face.hands-cats .hand.right {
+  right: -2px;
+  top: 42px;
+  transform: scale(1.1) rotate(-25deg);
+  animation: neko-paws-r 0.4s ease infinite alternate;
+}
+
+/* Winking sassy waving arm */
+.mascot-face.hands-wink .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-wink .hand.left {
+  left: 8px;
+  top: 62px;
+  transform: scale(0.9) rotate(35deg);
+}
+.mascot-face.hands-wink .hand.right {
+  right: -10px;
+  top: 40px;
+  transform: scale(1.15) rotate(-15deg);
+  animation: wink-wave 0.3s ease infinite alternate;
+}
+
+/* Dizzy lifeless hanging low */
+.mascot-face.hands-dizzy .hand {
+  opacity: 0.8;
+  pointer-events: auto;
+}
+.mascot-face.hands-dizzy .hand.left {
+  left: 8px;
+  top: 76px;
+  transform: scale(0.9) rotate(5deg);
+}
+.mascot-face.hands-dizzy .hand.right {
+  right: 8px;
+  top: 76px;
+  transform: scale(0.9) rotate(-5deg);
+}
+
+/* Cool crossed arms in front */
+.mascot-face.hands-cool .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-cool .hand.left {
+  left: 16px;
+  top: 56px;
+  transform: scale(1.1) rotate(55deg);
+}
+.mascot-face.hands-cool .hand.right {
+  right: 16px;
+  top: 56px;
+  transform: scale(1.1) rotate(-55deg);
+}
+
+/* Rage furiously shaking fists */
+.mascot-face.hands-rage .hand {
+  opacity: 1;
+  pointer-events: auto;
+  background: linear-gradient(180deg, #ff4c4c 0%, #c62828 100%) !important;
+}
+.mascot-face.hands-rage .hand::before,
+.mascot-face.hands-rage .hand::after {
+  background: #c62828 !important;
+}
+.mascot-face.hands-rage .hand.left {
+  left: -8px;
+  top: 36px;
+  transform: scale(1.2) rotate(20deg);
+  animation: rage-fist 0.1s linear infinite;
+}
+.mascot-face.hands-rage .hand.right {
+  right: -8px;
+  top: 36px;
+  transform: scale(1.2) rotate(-20deg);
+  animation: rage-fist 0.1s linear infinite reverse;
+}
+
+/* Star-struck Anime waving excited arms */
+.mascot-face.hands-starry .hand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mascot-face.hands-starry .hand.left {
+  left: -12px;
+  top: 42px;
+  transform: scale(1.15) rotate(-25deg);
+  animation: starry-wave-l 0.4s ease infinite alternate;
+}
+.mascot-face.hands-starry .hand.right {
+  right: -12px;
+  top: 42px;
+  transform: scale(1.15) rotate(25deg);
+  animation: starry-wave-r 0.4s ease infinite alternate;
+}
+
+
+/* ==========================================================================
+   Body Elements & Body Poses
+   ========================================================================== */
+
+.mascot-body {
+  width: 56px;
+  height: 28px;
+  margin-top: -4px;
+  background: linear-gradient(180deg, #ffd6ea, var(--lavender));
+  border-radius: 0 0 50% 50%;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+/* Squint Body changes */
+.mascot-face.body-squint ~ .mascot-body {
+  transform: scaleY(0.95);
+}
+
+.mascot-face.body-rage ~ .mascot-body {
+  background: linear-gradient(180deg, #c62828, #370000) !important;
+}
+
+/* ==========================================================================
+   Rage Mode Animated Fire Particles & Smoke Puffs
+   ========================================================================== */
+
+.rage-particle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 12;
+  transition: opacity 0.3s ease;
+}
+
+.rage-particle.fire-p {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 10%, #ffea00 35%, #ff3d00 70%, #d50000 100%);
+  box-shadow: 0 0 12px #ff3d00, 0 0 24px #ff9100, 0 0 36px #ffea00;
+}
+
+.rage-particle.smoke-p {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(220, 220, 220, 0.55);
+  filter: blur(2px);
+}
+
+/* Placements on Head */
+.rage-particle.p1 { top: -6px; left: 14px; }
+.rage-particle.p2 { top: -6px; right: 14px; }
+.rage-particle.p3 { top: -14px; left: -4px; }
+.rage-particle.p4 { top: -14px; right: -4px; }
+
+/* Active head animations */
+.mascot-face.rage .rage-particle.p1 {
+  opacity: 1;
+  animation: rage-fire-left 0.7s linear infinite;
+}
+.mascot-face.rage .rage-particle.p2 {
+  opacity: 1;
+  animation: rage-fire-right 0.7s linear infinite 0.15s;
+}
+.mascot-face.rage .rage-particle.p3 {
+  opacity: 1;
+  animation: rage-smoke-left 1.1s linear infinite 0.05s;
+}
+.mascot-face.rage .rage-particle.p4 {
+  opacity: 1;
+  animation: rage-smoke-right 1.1s linear infinite 0.25s;
+}
+
+/* Placements & Active hand animations */
+.mascot-face.hands-rage .hand .rage-particle.hand-p {
+  opacity: 1;
+  z-index: 15;
+}
+
+.mascot-face.hands-rage .hand.left .rage-particle.fire-p {
+  top: -8px;
+  left: 2px;
+  width: 7px;
+  height: 7px;
+  animation: rage-fire-left 0.6s linear infinite 0.03s;
+}
+.mascot-face.hands-rage .hand.right .rage-particle.fire-p {
+  top: -8px;
+  right: 2px;
+  width: 7px;
+  height: 7px;
+  animation: rage-fire-right 0.6s linear infinite 0.12s;
+}
+
+.mascot-face.hands-rage .hand.left .rage-particle.smoke-p {
+  top: -12px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  animation: rage-smoke-left 0.9s linear infinite 0.08s;
+}
+.mascot-face.hands-rage .hand.right .rage-particle.smoke-p {
+  top: -12px;
+  right: 4px;
+  width: 10px;
+  height: 10px;
+  animation: rage-smoke-right 0.9s linear infinite 0.2s;
+}
+
+/* Animations Keyframes */
+@keyframes rage-fire-left {
+  0% { transform: translateY(0) scale(0.4); opacity: 0; }
+  15% { opacity: 1; }
+  45% { transform: translateY(-12px) translateX(-4px) scale(1.6); opacity: 1; }
+  100% { transform: translateY(-28px) translateX(-10px) scale(0.1); opacity: 0; }
+}
+
+@keyframes rage-fire-right {
+  0% { transform: translateY(0) scale(0.4); opacity: 0; }
+  15% { opacity: 1; }
+  45% { transform: translateY(-12px) translateX(4px) scale(1.6); opacity: 1; }
+  100% { transform: translateY(-28px) translateX(10px) scale(0.1); opacity: 0; }
+}
+
+@keyframes rage-smoke-left {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.75; }
+  80% { opacity: 0.4; }
+  100% { transform: translateY(-32px) translateX(-10px) scale(1.7); opacity: 0; }
+}
+
+@keyframes rage-smoke-right {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.75; }
+  80% { opacity: 0.4; }
+  100% { transform: translateY(-32px) translateX(10px) scale(1.7); opacity: 0; }
+}
+
+/* ==========================================================================
+   30 Anime Kawaii Expressions
+   ========================================================================== */
+
+/* 1. Cat Face */
+.mascot-face.mouth-catface .mouth {
+  width: 20px; height: 10px; border: 3px solid var(--ink); border-top: none; border-radius: 0 0 50% 50%;
+}
+.mascot-face.mouth-catface .mouth::after {
+  content: ""; position: absolute; width: 20px; height: 10px; border: 3px solid var(--ink); border-top: none; border-radius: 0 0 50% 50%; left: 100%; top: -3px;
+}
+
+/* 2. Pout */
+.mascot-face.mouth-pout .mouth {
+  width: 8px; height: 6px; border: 3px solid var(--ink); border-bottom: none; border-radius: 50% 50% 0 0; bottom: 18px; transform: translateX(-50%);
+}
+
+/* 3. Sparkle Eyes */
+.mascot-face.eyes-sparkle .eye .pupil {
+  width: 14px; height: 14px; border-radius: 0; background: yellow; clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
+}
+
+/* 4. Blep */
+.mascot-face.mouth-blep .mouth {
+  width: 14px; height: 8px; border: 3px solid var(--ink); border-top: none; border-radius: 0 0 50% 50%;
+}
+.mascot-face.mouth-blep .mouth::after {
+  content: ""; position: absolute; width: 8px; height: 10px; background: pink; border: 2px solid var(--ink); border-top: none; border-radius: 0 0 5px 5px; top: 100%; left: 60%;
+}
+
+/* 5. Blushing Lines */
+.mascot-face.blush-blushinglines .blush {
+  background: repeating-linear-gradient(45deg, transparent, transparent 2px, #ff5e97 2px, #ff5e97 4px); opacity: 1; border-radius: 0; width: 20px;
+}
+
+/* 6. Crybaby */
+.mascot-face.eyes-crybaby .eye {
+  height: 6px; border-radius: 50% 50% 0 0; background: transparent; border: 3px solid var(--ink); border-bottom: none;
+}
+.mascot-face.eyes-crybaby .eye::after {
+  content: ""; position: absolute; width: 8px; height: 30px; background: #5c80e3; top: 10px; border-radius: 4px;
+}
+
+/* 7. Spiral Eyes */
+.mascot-face.eyes-spiral .eye {
+  background: repeating-radial-gradient(circle, white, white 2px, var(--ink) 2px, var(--ink) 4px);
+}
+.mascot-face.eyes-spiral .eye .pupil { display: none; }
+
+/* 8. White-Out */
+.mascot-face.eyes-whiteout .eye { background: white; border: 2px solid var(--ink); }
+.mascot-face.eyes-whiteout .eye .pupil { display: none; }
+
+/* 9. Dorito Mouth */
+.mascot-face.mouth-dorito .mouth {
+  width: 20px; height: 20px; background: #ff5252; clip-path: polygon(0% 100%, 100% 100%, 50% 0%); border-radius: 0; border: none;
+}
+
+/* 10. Heart Eyes */
+.mascot-face.eyes-hearteyes .eye .pupil {
+  width: 14px; height: 14px; background: #ff4a80; border-radius: 0;
+  clip-path: path('M7 14s-7-5.5-7-9.5A3.5 3.5 0 0 1 7 3.5 3.5 3.5 0 0 1 14 4.5c0 4-7 9.5-7 9.5z');
+}
+
+/* 11. Shark Teeth */
+.mascot-face.mouth-sharkteeth .mouth {
+  width: 24px; height: 12px; background: white; border: 2px solid var(--ink); border-radius: 0 0 12px 12px;
+  background-image: repeating-linear-gradient(60deg, transparent, transparent 5px, var(--ink) 5px, var(--ink) 6px);
+}
+
+/* 12. Snaggletooth */
+.mascot-face.mouth-snaggletooth .mouth::after {
+  content: ""; position: absolute; width: 6px; height: 6px; background: white; border-bottom: 2px solid var(--ink); border-right: 2px solid var(--ink); transform: rotate(45deg); top: -2px; left: 80%;
+}
+
+/* 13. Curved Closed */
+.mascot-face.eyes-curvedclosed .eye {
+  height: 8px; border-radius: 50% 50% 0 0; background: transparent; border: 3px solid var(--ink); border-bottom: none;
+}
+.mascot-face.eyes-curvedclosed .eye .pupil { display: none; }
+
+/* 14. Vertical Smug */
+.mascot-face.mouth-verticalsmug .mouth {
+  width: 10px; height: 6px; border: 3px solid var(--ink); border-top: none; border-left: none; border-radius: 0 0 50% 0; transform: rotate(15deg); left: 70%;
+}
+
+/* 15. Drooling */
+.mascot-face.mouth-drooling .mouth::after {
+  content: ""; position: absolute; width: 12px; height: 12px; border: 2px solid #aaddff; border-radius: 50%; top: -10px; left: -15px; background: rgba(170, 221, 255, 0.3);
+}
+
+/* 16. Sweat Drop */
+.mascot-face.face-sweatdrop::after {
+  content: ""; position: absolute; width: 14px; height: 14px; background: #5c80e3; border-radius: 0 50% 50% 50%; transform: rotate(45deg); top: 10px; right: 10px; z-index: 10;
+}
+
+/* 17. Hiding */
+.mascot-face.body-hiding ~ .mascot-body {
+  transform: translateY(-20px) scale(1.1); z-index: 20; border-radius: 10px 10px 0 0;
+}
+
+/* 18. X Eyes */
+.mascot-face.eyes-xeyes .eye { background: transparent; }
+.mascot-face.eyes-xeyes .eye::before, .mascot-face.eyes-xeyes .eye::after {
+  content: ""; position: absolute; width: 18px; height: 4px; background: var(--ink); top: 8px; left: 0;
+}
+.mascot-face.eyes-xeyes .eye::before { transform: rotate(45deg); }
+.mascot-face.eyes-xeyes .eye::after { transform: rotate(-45deg); }
+.mascot-face.eyes-xeyes .eye .pupil { display: none; }
+
+/* 19. Squiggle Mouth */
+.mascot-face.mouth-squigglemouth .mouth {
+  width: 24px; height: 6px; background: transparent; border: none;
+  background-image: repeating-linear-gradient(45deg, var(--ink) 0, var(--ink) 2px, transparent 2px, transparent 4px);
+}
+
+/* 20. Dot Face */
+.mascot-face.eyes-dotface .eye { width: 6px; height: 6px; border-radius: 50%; background: var(--ink); top: 35px; }
+.mascot-face.mouth-dotface .mouth { width: 8px; height: 2px; border-radius: 0; background: var(--ink); }
+
+/* 21. Star Mouth */
+.mascot-face.mouth-starmouth .mouth {
+  width: 14px; height: 14px; background: #ff5252; clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%); border-radius: 0; border: none;
+}
+
+/* 22. OwO */
+.mascot-face.eyes-owo .eye { width: 24px; height: 24px; background: white; border: 2px solid var(--ink); }
+.mascot-face.eyes-owo .eye .pupil { width: 8px; height: 8px; background: var(--ink); top: 8px; left: 8px; }
+
+/* 23. Nyan Wink */
+.mascot-face.eyes-nyanwink .eye.left { width: 22px; height: 22px; }
+.mascot-face.eyes-nyanwink .eye.left .pupil { width: 4px; height: 14px; border-radius: 50%; }
+.mascot-face.eyes-nyanwink .eye.right { background: transparent; border: 4px solid var(--ink); border-bottom: none; border-right: none; transform: rotate(-45deg); height: 12px; }
+
+/* 24. Steaming */
+.mascot-face.face-steaming { background: #ff7676; }
+.mascot-face.face-steaming::before, .mascot-face.face-steaming::after {
+  content: ""; position: absolute; width: 20px; height: 20px; background: rgba(255,255,255,0.8); border-radius: 50%; top: -10px; filter: blur(2px); animation: steam-rise 1s infinite;
+}
+.mascot-face.face-steaming::before { left: -10px; }
+.mascot-face.face-steaming::after { right: -10px; }
+@keyframes steam-rise { 100% { transform: translateY(-20px) scale(1.5); opacity: 0; } }
+
+/* 25. Half Lid */
+.mascot-face.eyes-halflid .eye::after {
+  content: ""; position: absolute; width: 100%; height: 50%; background: #ffd6ea; top: 0; left: 0; border-bottom: 2px solid var(--ink);
+}
+
+/* 26. Abstract Tooth */
+.mascot-face.mouth-abstracttooth .mouth::before {
+  content: ""; position: absolute; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid white; top: -2px; left: 100%; filter: drop-shadow(0 1px 0 var(--ink));
+}
+
+/* 27. Ghost Face */
+.mascot-face.face-ghostface { background: #f0f8ff; }
+
+/* 28. Phew Cross */
+.mascot-face.face-phewcross::after {
+  content: "+"; position: absolute; color: #ffeb3b; font-size: 24px; font-weight: bold; top: -5px; right: 0; text-shadow: 0 0 2px var(--ink);
+}
+
+/* 29. Diamond Eyes */
+.mascot-face.eyes-diamondeyes .eye .pupil {
+  width: 10px; height: 16px; background: white; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); border-radius: 0;
+}
+
+/* 30. Happy Tears */
+.mascot-face.eyes-happytears .eye { height: 8px; border-radius: 50% 50% 0 0; background: transparent; border: 3px solid var(--ink); border-bottom: none; }
+.mascot-face.eyes-happytears .eye::before { content: ""; position: absolute; width: 6px; height: 6px; background: #aaddff; border-radius: 50%; top: 6px; right: -4px; }
