@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TOG3R - Co-Watch Together</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="styles/core.css" />
+  <link rel="stylesheet" href="styles/glassmorphism.css" />
+  <link rel="stylesheet" href="styles/dashboard.css" />
+  <link rel="stylesheet" href="styles/rooms.css" />
+  <link rel="stylesheet" href="mascot/sam.css" />
+  <link rel="stylesheet" href="mascot/responses.css" />
+</head>
+<body class="theme-blossom">
+  <!-- Ambient Glow Background -->
+  <div class="ambient-glow" id="ambientGlow"></div>
+  
+  <!-- Glass Navigation Bar -->
+  <nav class="glass-navbar navbar">
+    <a href="/" class="navbar-brand">
+      <svg class="icon" viewBox="0 0 40 40" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" stroke="url(#brandGradient)" stroke-width="3" fill="none"/>
+        <path d="M14 20l6 6 6-6" stroke="url(#brandGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs>
+          <linearGradient id="brandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ff7eb3"/>
+            <stop offset="100%" style="stop-color:#ff5e9e"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      TOG3R
+    </a>
+    
+    <div class="navbar-search">
+      <svg class="icon navbar-search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="M21 21l-4.35-4.35"/>
+      </svg>
+      <input type="text" placeholder="Search for videos, channels, or paste a link..." id="searchInput" />
+    </div>
+    
+    <div class="navbar-actions">
+      <button class="btn btn-secondary" id="joinRoomBtn">
+        <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+        </svg>
+        Join Room
+      </button>
+      
+      <div class="profile-avatar" id="profileAvatar" tabindex="0" aria-label="Profile menu">
+        <span class="profile-avatar-placeholder" id="avatarPlaceholder">U</span>
+        <img src="" alt="Profile" id="avatarImage" style="display: none;" />
+      </div>
+      
+      <!-- Profile Dropdown Menu -->
+      <div class="glass-dropdown" id="profileDropdown">
+        <div class="dropdown-header" style="padding-bottom: 12px; border-bottom: 1px solid var(--card-border); margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="profile-avatar" style="width: 48px; height: 48px;">
+              <span class="profile-avatar-placeholder" id="dropdownAvatarPlaceholder">U</span>
+              <img src="" alt="Profile" id="dropdownAvatarImage" style="display: none;" />
+            </div>
+            <div>
+              <div style="font-weight: 700; color: var(--ink);" id="dropdownName">User</div>
+              <div style="font-size: 0.8rem; color: var(--ink-soft);" id="dropdownHandle">@username</div>
+            </div>
+          </div>
+        </div>
+        
+        <button class="dropdown-item" id="accountSettingsBtn">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          Account Settings
+        </button>
+        
+        <button class="dropdown-item" id="themeSelectorBtn">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          Theme
+        </button>
+        
+        <button class="dropdown-item" id="premiumBtn">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          Premium
+          <span class="badge badge-live" style="margin-left: auto;">NEW</span>
+        </button>
+        
+        <button class="dropdown-item" id="settingsBtn">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+          </svg>
+          Settings
+        </button>
+        
+        <div style="height: 1px; background: var(--card-border); margin: 12px 0;"></div>
+        
+        <button class="dropdown-item" id="logoutBtn" style="color: #ff4757;">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Platform Selector Bar -->
+  <div class="platform-bar" id="platformBar">
+    <div class="platform-card active" data-platform="youtube">
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      </svg>
+      <span>YouTube</span>
+    </div>
+    
+    <div class="platform-card" data-platform="netflix">
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+        <path d="M4.545 0v24l5.454-3.636V6.545L16.364 24h5.454V0l-5.454 3.636v13.818L9.999 0H4.545z"/>
+      </svg>
+      <span>Netflix</span>
+    </div>
+    
+    <div class="platform-card" data-platform="instagram">
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+      </svg>
+      <span>Reels</span>
+    </div>
+    
+    <div class="platform-card" data-platform="tiktok">
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+        <path d="M12.53 0v8.07a4.48 4.48 0 00-2.5-1.07 4.5 4.5 0 104.5 4.5V9.75a6.25 6.25 0 11-6.25 6.25 6.19 6.19 0 01.75-3V0h3.5z"/>
+      </svg>
+      <span>TikTok</span>
+    </div>
+    
+    <div class="platform-card" data-platform="custom">
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="5 3 19 12 5 21 5 3"/>
+      </svg>
+      <span>Custom</span>
+    </div>
+  </div>
+  
+  <!-- Main Dashboard Content -->
+  <main class="dashboard-container" id="dashboardContent">
+    <!-- Hero Banner -->
+    <section class="hero-banner" id="heroBanner">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 514'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ff7eb3;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23c4b5fd;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='514' fill='url(%23grad1)'/%3E%3C/svg%3E" alt="Hero" class="hero-banner-image" />
+      <div class="hero-banner-content">
+        <span class="hero-banner-badge">
+          <span class="badge-live">LIVE</span>
+          Trending Now
+        </span>
+        <h1 class="hero-banner-title">Watch Together, Anywhere</h1>
+        <p class="hero-banner-description">Create rooms, invite friends, and sync your favorite content across YouTube, Netflix, Instagram, TikTok, and more. The ultimate co-watching experience.</p>
+      </div>
+    </section>
+    
+    <!-- Trending Live Rooms Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <h2 class="section-title">🔥 Trending Live Rooms</h2>
+        <a href="#" class="section-link">
+          View All
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+      </div>
+      
+      <div class="media-grid" id="trendingRoomsGrid">
+        <!-- Media cards will be dynamically inserted here -->
+      </div>
+    </section>
+    
+    <!-- Popular on YouTube Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <h2 class="section-title">Popular on YouTube</h2>
+        <a href="#" class="section-link">
+          View All
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+      </div>
+      
+      <div class="media-grid" id="youtubeGrid">
+        <!-- Media cards will be dynamically inserted here -->
+      </div>
+    </section>
+    
+    <!-- Saved Channels Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <h2 class="section-title">Saved Channels</h2>
+        <a href="#" class="section-link">
+          Manage
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+      </div>
+      
+      <div class="media-grid" id="savedChannelsGrid">
+        <!-- Media cards will be dynamically inserted here -->
+      </div>
+    </section>
+  </main>
+  
+  <!-- Theater Layout (Hidden by default) -->
+  <div class="room-theater" id="roomTheater">
+    <div class="player-section">
+      <div class="player-container" id="playerContainer">
+        <div class="player-wrapper" id="playerWrapper">
+          <!-- YouTube iframe or video element will be inserted here -->
+        </div>
+        
+        <div class="player-overlay">
+          <div class="player-progress-bar" id="progressBar">
+            <div class="player-progress-filled" id="progressFilled"></div>
+          </div>
+          
+          <div class="player-controls-row">
+            <div class="player-controls-left">
+              <button class="player-control-btn" id="playPauseBtn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </button>
+              <button class="player-control-btn" id="muteBtn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                  <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>
+                </svg>
+              </button>
+              <span class="player-time-display" id="timeDisplay">0:00 / 0:00</span>
+            </div>
+            
+            <div class="player-controls-right">
+              <input type="range" class="player-volume-slider" id="volumeSlider" min="0" max="100" value="100" />
+              <button class="player-control-btn" id="pipBtn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="8" width="14" height="10" rx="2" ry="2"/>
+                  <rect x="12" y="2" width="10" height="6" rx="1" ry="1"/>
+                </svg>
+              </button>
+              <button class="player-control-btn" id="fullscreenBtn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"/>
+                  <polyline points="9 21 3 21 3 15"/>
+                  <line x1="21" y1="3" x2="14" y2="10"/>
+                  <line x1="3" y1="21" x2="10" y2="14"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="player-info-bar">
+        <div>
+          <h3 class="player-info-title" id="playerTitle">Video Title</h3>
+          <div class="player-info-meta">
+            <span id="playerPlatform">YouTube</span>
+            <span>•</span>
+            <span id="playerViewers">0 watching</span>
+          </div>
+        </div>
+        
+        <div class="player-actions">
+          <button class="action-btn" id="shareRoomBtn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"/>
+              <circle cx="6" cy="12" r="3"/>
+              <circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+            Share
+          </button>
+          <button class="action-btn" id="leaveRoomBtn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Leave
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Chat Sidebar -->
+    <div class="chat-sidebar">
+      <div class="chat-sidebar-header">
+        <div class="chat-sidebar-title">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+          </svg>
+          Room Chat
+          <span class="chat-viewer-count">
+            <span class="chat-viewer-dot"></span>
+            <span id="viewerCount">0</span>
+          </span>
+        </div>
+        <button class="chat-close-btn" id="closeChatBtn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Room Code Display -->
+      <div class="room-code-display" id="roomCodeDisplay">
+        <span class="room-code-label">Room Code:</span>
+        <span class="room-code-value" id="roomCodeValue">TOG3R-XXXX</span>
+        <button class="room-code-copy-btn" id="copyRoomCodeBtn">Copy</button>
+      </div>
+      
+      <div class="chat-messages-container" id="chatMessagesContainer">
+        <!-- Chat messages will be dynamically inserted here -->
+      </div>
+      
+      <div class="reaction-bar" id="reactionBar">
+        <button class="reaction-item" data-reaction="❤️">❤️</button>
+        <button class="reaction-item" data-reaction="🔥">🔥</button>
+        <button class="reaction-item" data-reaction="😂">😂</button>
+        <button class="reaction-item" data-reaction="😮">😮</button>
+        <button class="reaction-item" data-reaction="👏">👏</button>
+        <button class="reaction-item" data-reaction="🎉">🎉</button>
+      </div>
+      
+      <div class="chat-input-section">
+        <div class="chat-input-wrapper">
+          <input type="text" placeholder="Type a message..." id="chatInput" />
+          <button class="chat-send-btn" id="chatSendBtn">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <div class="viewers-list" id="viewersList">
+        <div class="viewers-list-title">In This Room</div>
+        <!-- Viewer items will be dynamically inserted here -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Create Room Modal -->
+  <div class="modal-overlay" id="createRoomModal">
+    <div class="modal-content">
+      <div style="padding: 24px 28px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+          <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--ink);">Create Room</h2>
+          <button class="chat-close-btn" id="closeCreateRoomModal">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+        
+        <form id="createRoomForm">
+          <label class="field" style="display: block; margin-bottom: 18px;">
+            <span class="label" style="display: block; font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 6px;">Select Platform</span>
+            <select class="input-field" id="roomPlatform" required>
+              <option value="youtube">YouTube</option>
+              <option value="netflix">Netflix</option>
+              <option value="instagram">Instagram Reels</option>
+              <option value="tiktok">TikTok</option>
+              <option value="custom">Custom URL</option>
+            </select>
+          </label>
+          
+          <label class="field" style="display: block; margin-bottom: 18px;">
+            <span class="label" style="display: block; font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 6px;">Video/Stream URL</span>
+            <input type="url" class="input-field" id="roomUrl" placeholder="Paste YouTube link or stream URL..." required />
+          </label>
+          
+          <label class="field" style="display: block; margin-bottom: 18px;">
+            <span class="label" style="display: block; font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 6px;">Room Name</span>
+            <input type="text" class="input-field" id="roomName" placeholder="My Awesome Watch Party" maxlength="50" required />
+          </label>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+              <input type="checkbox" id="roomPrivacy" style="width: 18px; height: 18px; accent-color: var(--pink-deep);" />
+              <span style="font-size: 0.9rem; font-weight: 600; color: var(--ink);">Private Room</span>
+            </label>
+            
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+              <input type="checkbox" id="roomCollab" style="width: 18px; height: 18px; accent-color: var(--pink-deep);" />
+              <span style="font-size: 0.9rem; font-weight: 600; color: var(--ink);">Collaborative Controls</span>
+            </label>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 1rem;">
+            Create Room & Start Watching
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Join Room Modal -->
+  <div class="modal-overlay" id="joinRoomModal">
+    <div class="modal-content">
+      <div style="padding: 24px 28px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+          <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--ink);">Join Room</h2>
+          <button class="chat-close-btn" id="closeJoinRoomModal">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+        
+        <form id="joinRoomForm">
+          <label class="field" style="display: block; margin-bottom: 18px;">
+            <span class="label" style="display: block; font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 6px;">Enter Room Code</span>
+            <input type="text" class="input-field" id="joinRoomCode" placeholder="TOG3R-XXXX" maxlength="12" required style="text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Courier New', monospace;" />
+          </label>
+          
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 1rem;">
+            Join Room
+          </button>
+        </form>
+        
+        <div style="margin-top: 16px; padding: 16px; background: rgba(255, 126, 179, 0.1); border-radius: var(--radius-md); text-align: center;">
+          <p style="font-size: 0.85rem; color: var(--ink-soft); margin: 0;">
+            Don't have a code? Ask your friend to share their room code!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Floating Action Button -->
+  <button class="fab" id="hostSessionFab" aria-label="Host Session">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M5 12h14"/>
+    </svg>
+  </button>
+  
+  <!-- Picture-in-Picture Window (Hidden by default) -->
+  <div class="pip-window" id="pipWindow" style="display: none;">
+    <div class="pip-video-container" id="pipVideoContainer">
+      <!-- Mini player will be inserted here -->
+    </div>
+    <div class="pip-controls">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button class="player-control-btn" id="pipPlayPauseBtn" style="width: 32px; height: 32px;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+        </button>
+        <span style="font-size: 0.8rem; font-weight: 600; color: white;" id="pipRoomCode">TOG3R-XXXX</span>
+      </div>
+      <button class="chat-close-btn" id="closePipBtn" style="width: 28px; height: 28px; background: rgba(255,255,255,0.2); color: white;">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  
+  <!-- App Scripts -->
+  <script src="scripts/auth.js"></script>
+  <script src="scripts/dashboard.js"></script>
+  <script src="scripts/platforms.js"></script>
+  <script src="scripts/rooms.js"></script>
+  <script src="scripts/sync.js"></script>
+</body>
+</html>
