@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>TOG3R - The Ultimate Streaming Experience</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mascot/sam.css">
+    <link rel="stylesheet" href="mascot/responses.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Animated Background -->
+        <div class="bg-blobs">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+
+        <!-- Premium Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-resizer" id="sidebarResizer"></div>
+            <div class="logo">
+                <div class="logo-icon">T</div>
+                <span class="logo-text">TOG3R</span>
+            </div>
+            <nav class="nav-menu">
+                <div class="nav-section">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li class="active"><a href="#" data-section="home"><i class="fas fa-house"></i> Home</a></li>
+                        <li><a href="#" data-section="trending"><i class="fas fa-fire"></i> Trending</a></li>
+                        <li><a href="#" data-section="live"><i class="fas fa-broadcast-tower"></i> Live Now</a></li>
+                        <li><a href="#" data-section="cinema"><i class="fas fa-clapperboard"></i> Cinema</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h3>Personal</h3>
+                    <ul>
+                        <li><a href="#" data-section="watchlist"><i class="fas fa-bookmark"></i> Watchlist</a></li>
+                        <li><a href="#" data-section="history"><i class="fas fa-clock-rotate-left"></i> History</a></li>
+                        <li><a href="#" data-section="favorites"><i class="fas fa-star"></i> Favorites</a></li>
+                        <li><a href="#" data-section="settings"><i class="fas fa-gear"></i> Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=Premium+User&background=7928ca&color=fff" alt="User">
+                <div class="user-info">
+                    <span class="name">Premium User</span>
+                    <span class="plan">PRO MEMBER</span>
+                </div>
+                <i class="fas fa-chevron-up" style="font-size: 12px; opacity: 0.5;"></i>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="header-left">
+                    <button class="action-btn toggle-sidebar" id="toggleSidebar" title="Toggle Sidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="search-bar">
+                        <i class="fas fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search movies, creators, or live events...">
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="notifications-container">
+                        <button class="action-btn" id="notifBtn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge"></span>
+                        </button>
+                        <div class="notif-dropdown" id="notifDropdown">
+                            <div class="notif-header">
+                                <h3>Notifications</h3>
+                                <button class="mark-read">Clear</button>
+                            </div>
+                            <div class="notif-list">
+                                <div class="notif-item unread">
+                                    <div class="notif-icon welcome">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="notif-info">
+                                        <p class="notif-msg">Welcome to <strong>TOG3R Premium</strong>! Start exploring our exclusive content.</p>
+                                        <span class="notif-time">Just now</span>
+                                    </div>
+                                    <div class="unread-dot"></div>
+                                </div>
+                            </div>
+                            <div class="notif-footer">
+                                <a href="#">See all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- Home Section -->
+                <div id="home-section" class="dashboard-section active">
+                    <!-- Hero Section -->
+                    <section class="hero-section">
+                        <div class="hero-card" id="heroCard">
+                            <div class="hero-overlay"></div>
+                            <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=90" alt="Featured" class="hero-img active">
+                            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1400&q=90" alt="Featured" class="hero-img">
+                            <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=1400&q=90" alt="Featured" class="hero-img">
+                            
+                            <div class="hero-content">
+                                <span class="tag">EXCLUSIVE PREMIERE</span>
+                                <h1 id="heroTitle">Interstellar: <br>Beyond Time</h1>
+                                <p id="heroDesc">A masterpiece by Christopher Nolan. A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.</p>
+                                <div class="hero-buttons">
+                                    <button class="play-btn"><i class="fas fa-play"></i> START WATCHING</button>
+                                    <button class="info-btn"><i class="fas fa-plus"></i> ADD TO LIST</button>
+                                </div>
+                            </div>
+
+                            <div class="hero-nav">
+                                <button class="hero-nav-btn next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+
+                            <div class="hero-indicators" id="heroIndicators">
+                                <span class="indicator active"></span>
+                                <span class="indicator"></span>
+                                <span class="indicator"></span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Trending Row (Sample for Home) -->
+                    <section class="content-row">
+                        <div class="row-header">
+                            <h2>Trending This Week</h2>
+                            <a href="#" class="see-all">View All <i class="fas fa-chevron-right" style="font-size: 10px; margin-left: 4px;"></i></a>
+                        </div>
+                        <div class="card-grid">
+                            <div class="movie-card">
+                                <div class="card-img">
+                                    <span class="card-tag">HD</span>
+                                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80" alt="Movie">
+                                    <div class="card-overlay">
+                                        <button class="play-mini"><i class="fas fa-play"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <h3>The Art of Motion</h3>
+                                    <div class="meta">
+                                        <span class="rating"><i class="fas fa-star"></i> 4.9</span>
+                                        <span>• Action • 2h 15m</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="movie-card">
+                                <div class="card-img">
+                                    <span class="card-tag" style="background: var(--accent-color);">LIVE</span>
+                                    <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=400&q=80" alt="Movie">
+                                    <div class="card-overlay">
+                                        <button class="play-mini"><i class="fas fa-play"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <h3>Urban Explorer: Tokyo</h3>
+                                    <div class="meta">
+                                        <span class="rating"><i class="fas fa-star"></i> 4.7</span>
+                                        <span>• Documentary • 15.2k Watching</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- Trending Section -->
+                <div id="trending-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Trending Now</h1>
+                        <p>The most watched content on TOG3R today</p>
+                    </div>
+                    <div class="card-grid">
+                        <!-- Content will be injected or placed here -->
+                    </div>
+                </div>
+
+                <!-- Live Section -->
+                <div id="live-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Live Streams</h1>
+                        <p>Watch and interact with creators in real-time</p>
+                    </div>
+                    <div class="card-grid">
+                        <!-- Live content -->
+                    </div>
+                </div>
+
+                <!-- Cinema Section -->
+                <div id="cinema-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Cinema</h1>
+                        <p>Premium movies and theatrical releases</p>
+                    </div>
+                    <!-- Cinema content -->
+                </div>
+
+                <!-- Watchlist Section -->
+                <div id="watchlist-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>My Watchlist</h1>
+                        <p>Content you've saved to watch later</p>
+                    </div>
+                    <div class="empty-state">
+                        <i class="fas fa-bookmark"></i>
+                        <p>Your watchlist is empty. Start adding some movies!</p>
+                    </div>
+                </div>
+
+                <!-- History Section -->
+                <div id="history-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Watch History</h1>
+                        <p>Pick up where you left off</p>
+                    </div>
+                    <!-- History content -->
+                </div>
+
+                <!-- Favorites Section -->
+                <div id="favorites-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Favorites</h1>
+                        <p>Your most loved movies and creators</p>
+                    </div>
+                    <!-- Favorites content -->
+                </div>
+
+                <!-- Settings Section -->
+                <div id="settings-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Settings</h1>
+                        <p>Manage your account and preferences</p>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <h3>Account Information</h3>
+                            <div class="setting-item">
+                                <span>Email</span>
+                                <strong>premium@tog3r.com</strong>
+                            </div>
+                            <div class="setting-item">
+                                <span>Plan</span>
+                                <strong class="pro-tag">PRO MEMBER</strong>
+                            </div>
+                        </div>
+                        <div class="settings-card">
+                            <h3>Preferences</h3>
+                            <div class="setting-item">
+                                <span>Dark Mode</span>
+                                <div class="toggle-switch active"></div>
+                            </div>
+                            <div class="setting-item">
+                                <span>Auto-play Hero</span>
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2-Column Watch View Architecture -->
+                <div id="watch-view" class="dashboard-section">
+                    <div class="watch-layout">
+                        <!-- Left Main Column (~72% Default Width: 16:9 Video + Details Underneath) -->
+                        <div class="watch-left-col" id="watchLeftCol">
+                            <div class="video-player-container" id="videoPlayerContainer">
+                                <iframe 
+                                    id="youtube-player"
+                                    src=""
+                                    referrerpolicy="strict-origin-when-cross-origin"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    style="width: 100%; height: 100%; border: none;">
+                                </iframe>
+                            </div>
+
+                            <!-- Video Details Directly UNDER Video Frame -->
+                            <div class="watch-video-details">
+                                <h1 class="watch-video-title" id="watchVideoTitle">Loading Video...</h1>
+
+                                <div class="watch-channel-row">
+                                    <div class="channel-info-left">
+                                        <img src="https://ui-avatars.com/api/?name=Channel&background=7928ca&color=fff" alt="Channel Avatar" class="channel-avatar" id="channelAvatar">
+                                        <div class="channel-text">
+                                            <h3 id="watchChannelName">Channel Name</h3>
+                                            <span class="sub-count" id="watchSubCount">1.2M subscribers</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Collapsible Description Box -->
+                                <div class="watch-description-box" id="watchDescriptionBox">
+                                    <div class="desc-meta">
+                                        <span id="watchViewsCount">1.2M views</span>
+                                        <span>•</span>
+                                        <span id="watchUploadDate">2 days ago</span>
+                                    </div>
+                                    <p id="watchDescriptionText">Select a video from the grid to start streaming in high quality.</p>
+                                    <button type="button" class="btn-toggle-desc" id="btnToggleDesc">Show More</button>
+                                </div>
+
+                                <!-- Blurred Teaser Comments Section (Under Description) -->
+                                <div class="blurred-comments-section" id="blurredCommentsSection">
+                                    <div class="blurred-comments-header">
+                                        <span class="blurred-count" id="commentsCount">126</span> comments
+                                    </div>
+                                    <div class="comments-list-wrapper" id="blurredCommentsContent">
+                                        <!-- Realistic blurred comment rows rendered via JS -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Vertical Resizer Handle Divider Bar -->
+                        <div class="watch-resizer" id="watchResizer" title="Drag to resize video and chat width"></div>
+
+                        <!-- Right Column (~28% Default Width: Live Chat -> Tags -> Shorts -> Videos) -->
+                        <div class="watch-right-col" id="watchRightCol">
+                            <!-- 1. Live Chat Container -->
+                            <div class="live-chat-panel watch-chat-container" id="watchChatContainer">
+                                <div class="chat-header">
+                                    <div class="chat-title">
+                                        <i class="fas fa-comments"></i>
+                                        <span>Live Chat</span>
+                                    </div>
+                                    <span class="chat-status"><span class="status-dot"></span> LIVE</span>
+                                </div>
+                                <div class="chat-messages" id="chatLog">
+                                    <!-- Clean Real Chat Container -->
+                                </div>
+                                <form class="chat-input-form" id="chatForm">
+                                    <input type="text" id="chatInput" placeholder="Say something in live chat..." autocomplete="off" required />
+                                    <button type="submit" class="chat-send-btn" aria-label="Send Message">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- 2. Topic Filter Tags Bar -->
+                            <div class="suggestion-tags-container" id="suggestionTagsContainer">
+                                <!-- Dynamic tag pills rendered via JS -->
+                            </div>
+
+                            <!-- 3. YouTube Shorts Shelf -->
+                            <div class="shorts-shelf-container" id="shortsShelfContainer">
+                                <div class="shorts-header">
+                                    <i class="fab fa-youtube" style="color: #ff0000; font-size: 16px;"></i>
+                                    <span>Shorts</span>
+                                </div>
+                                <div class="shorts-row" id="shortsRow">
+                                    <!-- Dynamic 9:16 Shorts cards rendered via JS -->
+                                </div>
+                            </div>
+
+                            <!-- 4. Standard Suggested Videos List -->
+                            <div class="up-next-list" id="upNextList">
+                                <!-- Dynamic horizontal video cards rendered via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Infinite Scroll Loading Indicator -->
+                <div class="infinite-loader" id="infiniteScrollLoader" hidden>
+                    <div class="spinner"></div>
+                    <span>Loading more YouTube videos...</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Premium Floating Mini Player -->
+        <div class="mini-player" id="miniPlayer">
+            <div class="player-content">
+                <div class="player-video">
+                    <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Playing">
+                </div>
+                <div class="player-info">
+                    <span class="status">NOW STREAMING</span>
+                    <span class="title">Interstellar: Beyond Time</span>
+                </div>
+                <div class="player-controls">
+                    <button><i class="fas fa-backward-step"></i></button>
+                    <button class="play-pause"><i class="fas fa-pause"></i></button>
+                    <button><i class="fas fa-forward-step"></i></button>
+                    <button class="close-player"><i class="fas fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" style="width: 45%"></div>
+            </div>
+        </div>
+
+        <!-- Sam Mascot -->
+        <div class="mascot" id="mascot" aria-hidden="true" style="position: fixed; bottom: 100px; right: 40px; z-index: 1000; pointer-events: auto;">
+          <div class="mascot-bubble" id="mascotBubble">
+            <span id="mascotText">Hi! I'm here to help.</span>
+          </div>
+          <div class="mascot-face" id="face">
+            <div class="eyebrow left"></div>
+            <div class="eyebrow right"></div>
+            <div class="eye left" id="eyeL"><span class="pupil"></span></div>
+            <div class="eye right" id="eyeR"><span class="pupil"></span></div>
+            <div class="blush left"></div>
+            <div class="blush right"></div>
+            <div class="mouth" id="mouth"></div>
+            <div class="hand left"></div>
+            <div class="hand right"></div>
+          </div>
+          <div class="mascot-body"></div>
+        </div>
+    </div>
+
+    <!-- Mouse-Following Tooltip for Blurred Comments -->
+    <div id="comment-tooltip" class="comment-tooltip">Click to open comments on YouTube ↗</div>
+
+    <script src="mascot/responses.js"></script>
+    <script src="mascot/sam.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
