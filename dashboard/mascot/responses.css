@@ -1,0 +1,87 @@
+/* ==========================================================================
+   Sam - Isolated Responses Speech Bubble Styles
+   ========================================================================== */
+
+.mascot-bubble {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background: white;
+  padding: 10px 16px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(180, 120, 160, 0.15);
+  border: 2px solid rgba(255, 126, 179, 0.2);
+  min-width: 140px;
+  max-width: 220px;
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: bubble-float 3s ease-in-out infinite;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.mascot-bubble.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-10px);
+}
+
+.mascot-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px 8px 0 8px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+.mascot-bubble::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(2px);
+  border-width: 9px 9px 0 9px;
+  border-style: solid;
+  border-color: rgba(255, 126, 179, 0.2) transparent transparent transparent;
+}
+
+.mascot-bubble span {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+@keyframes bubble-float {
+  0%, 100% { transform: translateX(-50%) translateY(-10px); }
+  50% { transform: translateX(-50%) translateY(-15px); }
+}
+
+.mascot-bubble.pop {
+  animation: bubble-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.mascot-bubble.pop span {
+  animation: text-pop 0.3s ease-out backwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes bubble-pop {
+  0% { transform: translateX(-50%) translateY(20px) scale(0.5); opacity: 0; }
+  60% { transform: translateX(-50%) translateY(-15px) scale(1.05); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(-10px) scale(1); opacity: 1; }
+}
+
+@keyframes text-pop {
+  0% { transform: translateY(5px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}

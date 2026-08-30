@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>TOG3R - The Ultimate Streaming Experience</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mascot/sam.css">
+    <link rel="stylesheet" href="mascot/responses.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Animated Background -->
+        <div class="bg-blobs">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+
+        <!-- Premium Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-resizer" id="sidebarResizer"></div>
+            <div class="logo">
+                <div class="logo-icon">T</div>
+                <span class="logo-text">TOG3R</span>
+            </div>
+            <nav class="nav-menu">
+                <div class="nav-section">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li class="active"><a href="#" data-section="home"><i class="fas fa-house"></i> Home</a></li>
+                        <li>
+                            <a href="#" data-section="shorts" id="navShortsLink">
+                                <svg class="nav-shorts-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.77 10.32c-.77-.32-1.2-.5-1.2-.5l1.05-.53c1.78-.9 2.49-3.1 1.6-4.88-.9-1.78-3.1-2.49-4.88-1.6L6.26 6.89c-1.42.72-2.14 2.37-1.75 3.93.36 1.45 1.57 2.53 3.03 2.69l1.2.14-1.05.53c-1.78.9-2.49 3.1-1.6 4.88.9 1.78 3.1 2.49 4.88 1.6l8.08-4.08c1.42-.72 2.14-2.37 1.75-3.93-.36-1.45-1.57-2.53-3.03-2.69l-1.2-.14.25-.11zm-7.77 4.33 4.5-2.65-4.5-2.65v5.3z"/>
+                                </svg>
+                                <span>Shorts</span>
+                            </a>
+                        </li>
+                        <li><a href="#" data-section="trending"><i class="fas fa-fire"></i> Trending</a></li>
+                        <li><a href="#" data-section="cinema"><i class="fas fa-clapperboard"></i> Cinema</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h3>Personal</h3>
+                    <ul>
+                        <li><a href="#" data-section="watchlist"><i class="fas fa-bookmark"></i> Watchlist</a></li>
+                        <li><a href="#" data-section="history"><i class="fas fa-clock-rotate-left"></i> History</a></li>
+                        <li><a href="#" data-section="settings"><i class="fas fa-gear"></i> Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="user-profile" id="sidebarUserProfile">
+                <img id="dashboardUserAvatar" src="https://ui-avatars.com/api/?name=User&background=7928ca&color=fff" alt="User">
+                <div class="user-info">
+                    <span class="name" id="dashboardUserName">User</span>
+                    <span class="plan" id="dashboardUserHandle">@user</span>
+                </div>
+                <button type="button" class="btn-logout-sidebar" id="dashboardLogoutBtn" title="Log Out" aria-label="Log Out">
+                    <i class="fas fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="header-left">
+                    <button class="action-btn toggle-sidebar" id="toggleSidebar" title="Toggle Sidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="search-bar-container" id="searchBarContainer">
+                        <div class="search-bar" id="mainSearchBar">
+                            <i class="fas fa-magnifying-glass search-leading-icon" id="searchBarIcon"></i>
+                            <input type="text" id="mainSearchInput" placeholder="Search videos, movies, creators, topics..." autocomplete="off" spellcheck="false">
+                            <button type="button" class="search-clear-btn" id="searchClearBtn" title="Clear search" aria-label="Clear search" style="display: none;">
+                                <i class="fas fa-xmark"></i>
+                            </button>
+                        </div>
+                        <!-- YouTube Autocomplete & Recent Search Suggestions -->
+                        <div class="search-suggestions-dropdown" id="searchSuggestionsDropdown" hidden>
+                            <div class="suggestions-section" id="recentSearchesSection" style="display: none;">
+                                <div class="suggestions-header">
+                                    <span><i class="fas fa-clock-rotate-left"></i> Recent Searches</span>
+                                    <button type="button" class="btn-clear-history" id="btnClearSearchHistory">Clear All</button>
+                                </div>
+                                <div class="suggestions-list" id="recentSearchesList"></div>
+                            </div>
+                            <div class="suggestions-section" id="trendingSearchesSection">
+                                <div class="suggestions-header">
+                                    <span><i class="fas fa-fire"></i> Popular & Trending Searches</span>
+                                </div>
+                                <div class="suggestions-list" id="trendingSearchesList"></div>
+                            </div>
+                            <div class="suggestions-section" id="liveQuerySuggestionsSection" style="display: none;">
+                                <div class="suggestions-list" id="liveQuerySuggestionsList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="notifications-container">
+                        <button class="action-btn" id="notifBtn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge"></span>
+                        </button>
+                        <div class="notif-dropdown" id="notifDropdown">
+                            <div class="notif-header">
+                                <h3>Notifications</h3>
+                                <button class="mark-read">Clear</button>
+                            </div>
+                            <div class="notif-list">
+                                <div class="notif-item unread">
+                                    <div class="notif-icon welcome">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="notif-info">
+                                        <p class="notif-msg">Welcome to <strong>TOG3R Premium</strong>! Start exploring our exclusive content.</p>
+                                        <span class="notif-time">Just now</span>
+                                    </div>
+                                    <div class="unread-dot"></div>
+                                </div>
+                            </div>
+                            <div class="notif-footer">
+                                <a href="#">See all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- Home Section -->
+                <div id="home-section" class="dashboard-section active">
+                    <!-- Hero Section -->
+                    <section class="hero-section">
+                        <div class="hero-card" id="heroCard">
+                            <div class="hero-overlay"></div>
+                            <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=90" alt="Featured" class="hero-img active">
+                            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1400&q=90" alt="Featured" class="hero-img">
+                            <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=1400&q=90" alt="Featured" class="hero-img">
+                            
+                            <div class="hero-content">
+                                <span class="tag">EXCLUSIVE PREMIERE</span>
+                                <h1 id="heroTitle">Interstellar: <br>Beyond Time</h1>
+                                <p id="heroDesc">A masterpiece by Christopher Nolan. A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.</p>
+                                <div class="hero-buttons">
+                                    <button class="play-btn"><i class="fas fa-play"></i> START WATCHING</button>
+                                    <button class="info-btn"><i class="fas fa-plus"></i> ADD TO LIST</button>
+                                </div>
+                            </div>
+
+                            <div class="hero-nav">
+                                <button class="hero-nav-btn next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+
+                            <div class="hero-indicators" id="heroIndicators">
+                                <span class="indicator active"></span>
+                                <span class="indicator"></span>
+                                <span class="indicator"></span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- YouTube-Style Dynamic Topic & Genre Tags Bar -->
+                    <section class="content-row">
+                        <div class="yt-tags-wrapper" id="ytTagsWrapper">
+                            <button class="yt-tags-scroll-btn left" id="ytTagsScrollLeft" aria-label="Scroll left" style="display: none;">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="yt-tags-bar" id="ytTagsBar" role="tablist" aria-label="Video Topics and Genres">
+                                <!-- Dynamic tags populated by recommendation engine -->
+                            </div>
+                            <button class="yt-tags-scroll-btn right" id="ytTagsScrollRight" aria-label="Scroll right">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="card-grid">
+                            <div class="movie-card">
+                                <div class="card-img">
+                                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80" alt="Movie">
+                                    <div class="card-overlay">
+                                        <button class="play-mini"><i class="fas fa-play"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <h3>The Art of Motion</h3>
+                                    <div class="meta">
+                                        <span class="rating"><i class="fas fa-star"></i> 4.9</span>
+                                        <span>• Action • 2h 15m</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="movie-card">
+                                <div class="card-img">
+                                    <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=400&q=80" alt="Movie">
+                                    <div class="card-overlay">
+                                        <button class="play-mini"><i class="fas fa-play"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <h3>Urban Explorer: Tokyo</h3>
+                                    <div class="meta">
+                                        <span class="rating"><i class="fas fa-star"></i> 4.7</span>
+                                        <span>• Documentary • 15.2k Watching</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- Dedicated Shorts Section (YouTube Shorts Experience) -->
+                <div id="shorts-section" class="dashboard-section">
+                    <div class="shorts-feed-container" id="shortsFeedContainer">
+                        <div class="shorts-viewport" id="shortsViewport">
+                            <!-- Dynamic Short Reels rendered here with scroll snap -->
+                        </div>
+                        <!-- Desktop Navigation Controls (Prev / Next Short) -->
+                        <div class="shorts-nav-controls" id="shortsNavControls">
+                            <button type="button" class="shorts-nav-arrow prev" id="btnPrevShort" title="Previous Short (Up Arrow)" aria-label="Previous Short">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                            <button type="button" class="shorts-nav-arrow next" id="btnNextShort" title="Next Short (Down Arrow)" aria-label="Next Short">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Slide-in Comments Drawer for Shorts -->
+                    <div class="shorts-comments-modal" id="shortsCommentsModal" hidden>
+                        <div class="shorts-comments-backdrop" id="shortsCommentsBackdrop"></div>
+                        <div class="shorts-comments-panel">
+                            <div class="shorts-comments-header">
+                                <h3>Comments <span class="comments-badge" id="shortsCommentsCount">2.4K</span></h3>
+                                <button type="button" class="btn-close-shorts-comments" id="btnCloseShortsComments" aria-label="Close Comments">
+                                    <i class="fas fa-xmark"></i>
+                                </button>
+                            </div>
+                            <div class="shorts-comments-list" id="shortsCommentsList">
+                                <!-- Comments items -->
+                            </div>
+                            <form class="shorts-comment-input-box" id="shortsCommentForm">
+                                <input type="text" id="shortsCommentInput" placeholder="Add a comment..." autocomplete="off" required>
+                                <button type="submit" class="btn-send-comment" aria-label="Post Comment">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trending Section -->
+                <div id="trending-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Trending Now</h1>
+                        <p>The most watched content on TOG3R today</p>
+                    </div>
+                    <div class="card-grid">
+                        <!-- Content will be injected or placed here -->
+                    </div>
+                </div>
+
+                <!-- Live Section -->
+                <div id="live-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Live Streams</h1>
+                        <p>Watch and interact with creators in real-time</p>
+                    </div>
+                    <div class="card-grid">
+                        <!-- Live content -->
+                    </div>
+                </div>
+
+                <!-- Cinema Section -->
+                <div id="cinema-section" class="dashboard-section">
+                    <!-- Cinema Header & Filter Controls -->
+                    <div class="cinema-header-bar">
+                        <div class="cinema-header-info">
+                            <div class="cinema-title-wrap">
+                                <h1><i class="fas fa-film cinema-icon-accent"></i> Cinema</h1>
+                            </div>
+                            <p>Explore and stream full movies uploaded on YouTube across different languages and genres</p>
+                        </div>
+
+                        <!-- Dropdown Selectors -->
+                        <div class="cinema-filters-row">
+                            <!-- Language Dropdown -->
+                            <div class="cinema-dropdown-wrapper" id="cinemaLangDropdownWrapper">
+                                <button type="button" class="cinema-dropdown-trigger" id="cinemaLangDropdownBtn" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-globe"></i>
+                                    <span class="dropdown-trigger-text" id="cinemaSelectedLangLabel">Language: All</span>
+                                    <i class="fas fa-chevron-down chevron-icon"></i>
+                                </button>
+                                <div class="cinema-dropdown-menu" id="cinemaLangMenu">
+                                    <div class="cinema-dropdown-search">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" id="cinemaLangSearchInput" placeholder="Search language..." autocomplete="off">
+                                    </div>
+                                    <div class="cinema-dropdown-list" id="cinemaLangList">
+                                        <!-- Populated via JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Genre Dropdown -->
+                            <div class="cinema-dropdown-wrapper" id="cinemaGenreDropdownWrapper">
+                                <button type="button" class="cinema-dropdown-trigger" id="cinemaGenreDropdownBtn" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-masks-theater"></i>
+                                    <span class="dropdown-trigger-text" id="cinemaSelectedGenreLabel">Genre: All</span>
+                                    <i class="fas fa-chevron-down chevron-icon"></i>
+                                </button>
+                                <div class="cinema-dropdown-menu" id="cinemaGenreMenu">
+                                    <div class="cinema-dropdown-search">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" id="cinemaGenreSearchInput" placeholder="Search genre..." autocomplete="off">
+                                    </div>
+                                    <div class="cinema-dropdown-list" id="cinemaGenreList">
+                                        <!-- Populated via JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Reset Filters Button -->
+                            <button type="button" class="cinema-reset-btn" id="cinemaResetFiltersBtn" title="Reset all filters">
+                                <i class="fas fa-rotate-left"></i>
+                                <span>Reset</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Active Filter Chips Bar -->
+                    <div class="cinema-active-filters-bar" id="cinemaActiveFiltersBar" style="display: none;">
+                        <span class="active-filters-label">Active Filters:</span>
+                        <div class="active-chips-container" id="cinemaActiveChipsContainer"></div>
+                        <button type="button" class="clear-all-chips-btn" id="cinemaClearAllChipsBtn">Clear all</button>
+                    </div>
+
+                    <!-- Cinema Movies Grid -->
+                    <div class="cinema-movie-grid" id="cinemaMovieGrid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Watchlist Section -->
+                <div id="watchlist-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>My Watchlist</h1>
+                        <p>Content you've saved to watch later</p>
+                    </div>
+                    <div class="card-grid"></div>
+                </div>
+
+                <!-- History Section -->
+                <div id="history-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Watch History</h1>
+                        <p>Pick up where you left off</p>
+                    </div>
+                    <div class="card-grid"></div>
+                </div>
+
+                <!-- Favorites Section -->
+                <div id="favorites-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Favorites</h1>
+                        <p>Your most loved movies and creators</p>
+                    </div>
+                    <div class="card-grid"></div>
+                </div>
+
+                <!-- Settings Section -->
+                <div id="settings-section" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Settings</h1>
+                        <p>Manage your account and preferences</p>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <h3>Account Information</h3>
+                            <div class="setting-item">
+                                <span>Name</span>
+                                <strong id="settingsName">User</strong>
+                            </div>
+                            <div class="setting-item">
+                                <span>Nickname</span>
+                                <strong id="settingsHandle">@user</strong>
+                            </div>
+                            <div class="setting-item">
+                                <span>Email</span>
+                                <strong id="settingsEmail">user@tog3r.com</strong>
+                            </div>
+                            <div class="setting-item">
+                                <span>Birthday</span>
+                                <strong id="settingsDob">-</strong>
+                            </div>
+                            <div class="setting-item">
+                                <span>Plan</span>
+                                <strong class="pro-tag">PRO MEMBER</strong>
+                            </div>
+                            <div class="setting-item" style="margin-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px;">
+                                <button type="button" class="btn-logout-settings" id="settingsLogoutBtn">
+                                    <i class="fas fa-arrow-right-from-bracket" style="margin-right: 8px;"></i> Log Out
+                                </button>
+                            </div>
+                        </div>
+                        <div class="settings-card">
+                            <h3>Preferences</h3>
+                            <div class="setting-item">
+                                <span>Dark Mode</span>
+                                <div class="toggle-switch active"></div>
+                            </div>
+                            <div class="setting-item">
+                                <span>Auto-play Hero</span>
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- YouTube-Style Search Results Section -->
+                <div id="search-section" class="dashboard-section">
+                    <div class="yt-search-header">
+                        <div class="yt-search-title-row">
+                            <div class="yt-search-query-info">
+                                <h1 class="yt-search-heading" id="searchHeadingTitle">Results for "<span id="searchQueryText"></span>"</h1>
+                                <p class="yt-search-sub" id="searchMetaSubtitle">Showing top matching results</p>
+                            </div>
+                            <div class="yt-search-actions">
+                                <div class="yt-view-toggle">
+                                    <button type="button" class="view-btn active" id="btnViewList" title="List View" aria-label="List View">
+                                        <i class="fas fa-list"></i>
+                                    </button>
+                                    <button type="button" class="view-btn" id="btnViewGrid" title="Grid View" aria-label="Grid View">
+                                        <i class="fas fa-border-all"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- YouTube Quick Filter Chips Bar (All, Videos, Shorts, Channels) -->
+                        <div class="yt-search-chips-wrapper" id="searchChipsWrapper">
+                            <div class="yt-search-chips-bar" id="searchChipsBar" role="tablist" aria-label="Search filter tags">
+                                <button type="button" class="search-chip active" data-filter-tag="all">All</button>
+                                <button type="button" class="search-chip" data-filter-tag="videos">Videos</button>
+                                <button type="button" class="search-chip" data-filter-tag="shorts">Shorts</button>
+                                <button type="button" class="search-chip" data-filter-tag="channels">Channels</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Results Dynamic List / Grid Container -->
+                    <div class="yt-search-results-container list-layout" id="searchResultsContainer">
+                        <!-- Dynamic search result cards or empty state -->
+                    </div>
+                </div>
+
+                <!-- 2-Column Watch View Architecture -->
+                <div id="watch-view" class="dashboard-section">
+                    <!-- Master Theater / Fullscreen Wrapper -->
+                    <div class="watch-master-container" id="watchMasterContainer">
+                        <div class="watch-layout">
+                            <!-- Left Main Column (~72% Default Width: 16:9 Video + Details Underneath) -->
+                            <div class="watch-left-col" id="watchLeftCol">
+                                <div class="video-player-container custom-player" id="videoPlayerContainer">
+                                    <!-- Embedded YouTube Video Frame -->
+                                    <div class="video-frame-wrapper" id="videoFrameWrapper">
+                                        <iframe 
+                                            id="youtube-player"
+                                            src=""
+                                            referrerpolicy="strict-origin-when-cross-origin"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen
+                                            style="width: 100%; height: 100%; border: none; pointer-events: none;">
+                                        </iframe>
+                                    </div>
+
+                                    <!-- Ambient Glow Filter Effect -->
+                                    <div class="player-ambient-glow" id="playerAmbientGlow"></div>
+
+                                    <!-- Custom Transparent Click Canvas -->
+                                    <div class="player-click-surface" id="playerClickSurface"></div>
+
+                                    <!-- Large Central Visual Feedback Ripple -->
+                                    <div class="player-center-ripple" id="playerCenterRipple">
+                                        <div class="ripple-icon-box" id="rippleIconBox">
+                                            <i class="fas fa-play"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- Buffering Spinner -->
+                                    <div class="player-buffer-spinner" id="playerBufferSpinner" hidden>
+                                        <div class="spinner-ring"></div>
+                                    </div>
+
+                                    <!-- Stylized Captions / Subtitles Overlay Box -->
+                                    <div class="player-subtitles-box" id="playerSubtitlesBox" hidden>
+                                        <span class="subtitles-text" id="subtitlesText">Welcome to the stream on TOG3R</span>
+                                    </div>
+
+                                    <!-- Custom UI Overlay Controls Container -->
+                                    <div class="custom-player-ui" id="customPlayerUi">
+                                        <!-- Top Player Bar with Back Button -->
+                                        <div class="player-top-header" id="playerTopHeader">
+                                            <div class="top-header-left">
+                                                <button type="button" class="player-hdr-btn player-back-btn" id="playerBackBtn" title="Back" aria-label="Back to previous view">
+                                                    <i class="fas fa-arrow-left"></i>
+                                                </button>
+                                                <h2 class="player-header-title" id="playerHeaderTitle">Loading Title...</h2>
+                                            </div>
+                                        </div>
+
+                                        <!-- Interactive Settings Floating Popover Card -->
+                                        <div class="player-settings-modal" id="playerSettingsModal" hidden>
+                                            <!-- Main Settings Menu Page -->
+                                            <div class="settings-menu-page" id="settingsPageMain">
+                                                <div class="settings-menu-header">
+                                                    <i class="fas fa-sliders"></i>
+                                                    <span>Player Settings</span>
+                                                </div>
+                                                <button type="button" class="settings-row-item" id="btnOpenSpeedMenu">
+                                                    <div class="row-label"><i class="fas fa-gauge-high"></i> Playback Speed</div>
+                                                    <div class="row-val"><span id="activeSpeedLabel">Normal (1x)</span> <i class="fas fa-chevron-right"></i></div>
+                                                </button>
+                                                <button type="button" class="settings-row-item" id="btnOpenQualityMenu">
+                                                    <div class="row-label"><i class="fas fa-wand-magic-sparkles"></i> Quality</div>
+                                                    <div class="row-val"><span id="activeQualityLabel">1080p (FHD)</span> <i class="fas fa-chevron-right"></i></div>
+                                                </button>
+                                                <button type="button" class="settings-row-item" id="btnOpenCaptionsMenu">
+                                                    <div class="row-label"><i class="fas fa-closed-captioning"></i> Captions</div>
+                                                    <div class="row-val"><span id="activeCaptionsLabel">Off</span> <i class="fas fa-chevron-right"></i></div>
+                                                </button>
+                                                <button type="button" class="settings-row-item" id="btnOpenDisplayMenu">
+                                                    <div class="row-label"><i class="fas fa-display"></i> Display</div>
+                                                    <div class="row-val"><span id="activeDisplayLabel">16:9</span> <i class="fas fa-chevron-right"></i></div>
+                                                </button>
+                                                <div class="settings-row-item toggle-row">
+                                                    <div class="row-label"><i class="fas fa-rotate"></i> Loop Video</div>
+                                                    <div class="custom-toggle" id="toggleLoopVideo"></div>
+                                                </div>
+                                                <div class="settings-row-item toggle-row">
+                                                    <div class="row-label"><i class="fas fa-sun"></i> Ambient Cinema Glow</div>
+                                                    <div class="custom-toggle active" id="toggleAmbientGlow"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Speed Submenu Page -->
+                                            <div class="settings-menu-page submenu" id="settingsPageSpeed" hidden>
+                                                <div class="submenu-header" id="btnBackToMainFromSpeed">
+                                                    <i class="fas fa-chevron-left"></i>
+                                                    <span>Playback Speed</span>
+                                                </div>
+                                                <div class="settings-options-list" id="speedOptionsList">
+                                                    <button type="button" class="option-item" data-speed="0.25">0.25x</button>
+                                                    <button type="button" class="option-item" data-speed="0.5">0.5x</button>
+                                                    <button type="button" class="option-item" data-speed="0.75">0.75x</button>
+                                                    <button type="button" class="option-item active" data-speed="1">Normal (1x)</button>
+                                                    <button type="button" class="option-item" data-speed="1.25">1.25x</button>
+                                                    <button type="button" class="option-item" data-speed="1.5">1.5x</button>
+                                                    <button type="button" class="option-item" data-speed="1.75">1.75x</button>
+                                                    <button type="button" class="option-item" data-speed="2">2x</button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Quality Submenu Page -->
+                                            <div class="settings-menu-page submenu" id="settingsPageQuality" hidden>
+                                                <div class="submenu-header" id="btnBackToMainFromQuality">
+                                                    <i class="fas fa-chevron-left"></i>
+                                                    <span>Streaming Quality</span>
+                                                </div>
+                                                <div class="settings-options-list" id="qualityOptionsList">
+                                                    <button type="button" class="option-item active" data-quality="1080p">1080p (FHD) • Ultra</button>
+                                                    <button type="button" class="option-item" data-quality="720p">720p (HD) • High</button>
+                                                    <button type="button" class="option-item" data-quality="480p">480p • Medium</button>
+                                                    <button type="button" class="option-item" data-quality="360p">360p • Data Saver</button>
+                                                    <button type="button" class="option-item" data-quality="auto">Auto (Adaptive)</button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Captions Submenu Page -->
+                                            <div class="settings-menu-page submenu" id="settingsPageCaptions" hidden>
+                                                <div class="submenu-header" id="btnBackToMainFromCaptions">
+                                                    <i class="fas fa-chevron-left"></i>
+                                                    <span>Subtitles & Captions</span>
+                                                </div>
+                                                <div class="settings-options-list" id="captionsOptionsList">
+                                                    <button type="button" class="option-item active" data-caption="off">Off</button>
+                                                    <button type="button" class="option-item" data-caption="en">English (auto-generated)</button>
+                                                    <button type="button" class="option-item" data-caption="es">Spanish</button>
+                                                    <button type="button" class="option-item" data-caption="fr">French</button>
+                                                    <button type="button" class="option-item" data-caption="ja">Japanese</button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Display Submenu Page -->
+                                            <div class="settings-menu-page submenu" id="settingsPageDisplay" hidden>
+                                                <div class="submenu-header" id="btnBackToMainFromDisplay">
+                                                    <i class="fas fa-chevron-left"></i>
+                                                    <span>Display</span>
+                                                </div>
+                                                <div class="display-settings-container">
+                                                    <!-- Aspect Ratio Stepper -->
+                                                    <div class="display-control-row">
+                                                        <div class="display-label">
+                                                            <i class="fas fa-crop-simple"></i>
+                                                            <span>Aspect ratio</span>
+                                                        </div>
+                                                        <div class="display-stepper">
+                                                            <button type="button" class="stepper-btn" id="aspectRatioPrev" title="Previous Aspect Ratio" aria-label="Previous Aspect Ratio">
+                                                                <i class="fas fa-chevron-left"></i>
+                                                            </button>
+                                                            <span class="stepper-value" id="aspectRatioVal">16:9</span>
+                                                            <button type="button" class="stepper-btn" id="aspectRatioNext" title="Next Aspect Ratio" aria-label="Next Aspect Ratio">
+                                                                <i class="fas fa-chevron-right"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Scaling Stepper -->
+                                                    <div class="display-control-row">
+                                                        <div class="display-label">
+                                                            <i class="fas fa-expand"></i>
+                                                            <span>Scaling</span>
+                                                        </div>
+                                                        <div class="display-stepper">
+                                                            <button type="button" class="stepper-btn" id="scalingPrev" title="Previous Scaling Mode" aria-label="Previous Scaling Mode">
+                                                                <i class="fas fa-chevron-left"></i>
+                                                            </button>
+                                                            <span class="stepper-value" id="scalingVal">Fill</span>
+                                                            <button type="button" class="stepper-btn" id="scalingNext" title="Next Scaling Mode" aria-label="Next Scaling Mode">
+                                                                <i class="fas fa-chevron-right"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Flip & Rotate Controls -->
+                                                    <div class="display-transform-row">
+                                                        <button type="button" class="transform-action-btn" id="btnFlipVideo" title="Flip Video Horizontally" aria-label="Flip Video Horizontally">
+                                                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                <polyline points="15 3 21 3 21 9"></polyline>
+                                                                <polyline points="9 21 3 21 3 15"></polyline>
+                                                                <line x1="21" y1="3" x2="14" y2="10"></line>
+                                                                <line x1="3" y1="21" x2="10" y2="14"></line>
+                                                            </svg>
+                                                            <span>Flip</span>
+                                                        </button>
+                                                        <div class="transform-divider">|</div>
+                                                        <button type="button" class="transform-action-btn" id="btnRotateVideo" title="Rotate Video 90°" aria-label="Rotate Video 90°">
+                                                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="M21.5 2v6h-6"></path>
+                                                                <path d="M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                                                            </svg>
+                                                            <span>Rotate</span>
+                                                            <span class="rotate-badge" id="rotateBadge">0°</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Bottom Control Bar -->
+                                        <div class="player-bottom-controls" id="playerBottomControls">
+                                            <!-- Interactive Progress Scrubber -->
+                                            <div class="player-scrubber-track" id="playerScrubberTrack">
+                                                <div class="scrubber-buffer-bar" id="scrubberBufferBar" style="width: 0%;"></div>
+                                                <div class="scrubber-hover-bar" id="scrubberHoverBar" style="width: 0%;"></div>
+                                                <div class="scrubber-played-bar" id="scrubberPlayedBar" style="width: 0%;"></div>
+                                                <div class="scrubber-pin-handle" id="scrubberPinHandle" style="left: 0%;"></div>
+                                                <div class="scrubber-hover-timestamp" id="scrubberHoverTimestamp">0:00</div>
+                                            </div>
+
+                                            <!-- Controls Action Row -->
+                                            <div class="player-action-row">
+                                                <div class="action-row-left">
+                                                    <!-- Play / Pause -->
+                                                    <button type="button" class="ctrl-icon-btn play-btn-main" id="ctrlPlayPauseBtn" title="Play/Pause (Space / K)" aria-label="Play or Pause">
+                                                        <i class="fas fa-play"></i>
+                                                    </button>
+                                                    <!-- Skip -10s -->
+                                                    <button type="button" class="ctrl-icon-btn skip-btn" id="ctrlRewind10Btn" title="Rewind 10 seconds (←)" aria-label="Rewind 10 seconds">
+                                                        <i class="fas fa-rotate-left"></i>
+                                                        <span class="skip-badge">10</span>
+                                                    </button>
+                                                    <!-- Skip +10s -->
+                                                    <button type="button" class="ctrl-icon-btn skip-btn" id="ctrlForward10Btn" title="Forward 10 seconds (→)" aria-label="Forward 10 seconds">
+                                                        <i class="fas fa-rotate-right"></i>
+                                                        <span class="skip-badge">10</span>
+                                                    </button>
+                                                    <!-- Volume Controls -->
+                                                    <div class="ctrl-volume-group" id="ctrlVolumeGroup">
+                                                        <button type="button" class="ctrl-icon-btn" id="ctrlVolumeBtn" title="Mute/Unmute (M)" aria-label="Volume Mute">
+                                                            <i class="fas fa-volume-high"></i>
+                                                        </button>
+                                                        <div class="volume-slider-box" id="volumeSliderBox">
+                                                            <div class="volume-slider-fill" id="volumeSliderFill" style="width: 100%;"></div>
+                                                            <input type="range" class="volume-range-input" id="volumeRangeInput" min="0" max="100" value="100" aria-label="Volume Slider">
+                                                        </div>
+                                                    </div>
+                                                    <!-- Time Display -->
+                                                    <div class="ctrl-time-display" id="ctrlTimeDisplay">
+                                                        <span id="ctrlCurrentTime">0:00</span>
+                                                        <span class="time-sep">/</span>
+                                                        <span id="ctrlTotalDuration">0:00</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="action-row-right">
+                                                    <!-- Subtitles / CC Toggle -->
+                                                    <button type="button" class="ctrl-icon-btn" id="ctrlCaptionsBtn" title="Subtitles/CC (c) - Off" aria-label="Subtitles" aria-pressed="false">
+                                                        <i class="fas fa-closed-captioning"></i>
+                                                    </button>
+                                                    <!-- Settings Menu Gear -->
+                                                    <button type="button" class="ctrl-icon-btn" id="ctrlSettingsBtn" title="Player Settings" aria-label="Settings">
+                                                        <i class="fas fa-gear"></i>
+                                                    </button>
+                                                    <!-- Live Chat Sidebar Toggle -->
+                                                    <button type="button" class="ctrl-icon-btn" id="ctrlChatSidebarBtn" title="Toggle Live Chat" aria-label="Toggle Live Chat" aria-pressed="false">
+                                                        <i class="fas fa-comments"></i>
+                                                    </button>
+                                                    <!-- Fullscreen Toggle -->
+                                                    <button type="button" class="ctrl-icon-btn" id="ctrlFullscreenBtn" title="Full Screen (F)" aria-label="Full Screen">
+                                                        <i class="fas fa-expand"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video Details Directly UNDER Video Frame -->
+                                <div class="watch-video-details">
+                                    <h1 class="watch-video-title" id="watchVideoTitle">Loading Video...</h1>
+
+                                    <div class="watch-channel-row">
+                                        <div class="channel-info-left">
+                                            <img src="https://ui-avatars.com/api/?name=Channel&background=7928ca&color=fff" alt="Channel Avatar" class="channel-avatar" id="channelAvatar">
+                                            <div class="channel-text">
+                                                <h3 id="watchChannelName">Channel Name</h3>
+                                                <span class="sub-count" id="watchSubCount">1.2M subscribers</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Collapsible Description Box -->
+                                    <div class="watch-description-box" id="watchDescriptionBox">
+                                        <div class="desc-meta">
+                                            <span id="watchViewsCount">1.2M views</span>
+                                            <span>•</span>
+                                            <span id="watchUploadDate">2 days ago</span>
+                                        </div>
+                                        <p id="watchDescriptionText">Select a video from the grid to start streaming in high quality.</p>
+                                        <button type="button" class="btn-toggle-desc" id="btnToggleDesc">Show More</button>
+                                    </div>
+
+                                    <!-- Blurred Teaser Comments Section (Under Description) -->
+                                    <div class="blurred-comments-section" id="blurredCommentsSection">
+                                        <div class="blurred-comments-header">
+                                            <span class="blurred-count" id="commentsCount">126</span> comments
+                                        </div>
+                                        <div class="comments-list-wrapper" id="blurredCommentsContent">
+                                            <!-- Realistic blurred comment rows rendered via JS -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Vertical Resizer Handle Divider Bar -->
+                            <div class="watch-resizer" id="watchResizer" title="Drag to resize video and chat width"></div>
+
+                            <!-- Right Column (Shorts + Recommended Videos, with Collapsible Live Chat) -->
+                            <div class="watch-right-col" id="watchRightCol">
+                                <!-- 1. Chat Container (Hidden by default, animates open on toggle) -->
+                                <div class="live-chat-panel watch-chat-container collapsed" id="watchChatContainer">
+                                    <div class="chat-header">
+                                        <div class="chat-title">
+                                            <i class="fas fa-comments"></i>
+                                            <span>Chat</span>
+                                        </div>
+                                        <div class="chat-header-actions">
+                                            <button type="button" class="chat-close-btn" id="chatCloseBtn" title="Close Chat" aria-label="Close Chat">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="chat-messages" id="chatLog">
+                                        <!-- Clean Real Chat Container -->
+                                    </div>
+                                    <form class="chat-input-form" id="chatForm">
+                                        <input type="text" id="chatInput" placeholder="Say something in chat..." autocomplete="off" required />
+                                        <button type="submit" class="chat-send-btn" aria-label="Send Message">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </form>
+                                </div>
+
+                                <!-- 2. YouTube Shorts Shelf -->
+                                <div class="shorts-shelf-container" id="shortsShelfContainer">
+                                    <div class="shorts-header">
+                                        <svg class="shorts-header-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.77 10.32c-.77-.32-1.2-.5-1.2-.5l1.05-.53c1.78-.9 2.49-3.1 1.6-4.88-.9-1.78-3.1-2.49-4.88-1.6L6.26 6.89c-1.42.72-2.14 2.37-1.75 3.93.36 1.45 1.57 2.53 3.03 2.69l1.2.14-1.05.53c-1.78.9-2.49 3.1-1.6 4.88.9 1.78 3.1 2.49 4.88 1.6l8.08-4.08c1.42-.72 2.14-2.37 1.75-3.93-.36-1.45-1.57-2.53-3.03-2.69l-1.2-.14.25-.11z" fill="#FF0000"/>
+                                            <polygon points="10 14.5 10 9.5 14.5 12" fill="#FFFFFF"/>
+                                        </svg>
+                                        <span>Shorts</span>
+                                    </div>
+                                    <div class="shorts-row-wrapper" id="shortsRowWrapper">
+                                        <button type="button" class="shorts-scroll-btn left" id="shortsScrollLeft" aria-label="Scroll left" style="display: none;">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <div class="shorts-row" id="shortsRow">
+                                            <!-- Dynamic 9:16 Shorts cards rendered via JS -->
+                                        </div>
+                                        <button type="button" class="shorts-scroll-btn right" id="shortsScrollRight" aria-label="Scroll right">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- 3. Recommended Videos Section -->
+                                <div class="recommended-section" id="recommendedSection">
+                                    <div class="recommended-header">
+                                        <svg class="recommended-header-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M21.58 7.19a2.76 2.76 0 0 0-1.95-1.96C17.9 4.75 12 4.75 12 4.75s-5.9 0-7.63.48a2.76 2.76 0 0 0-1.95 1.96C2 8.93 2 12 2 12s0 3.07.42 4.81a2.76 2.76 0 0 0 1.95 1.96c1.73.48 7.63.48 7.63.48s5.9 0 7.63-.48a2.76 2.76 0 0 0 1.95-1.96c.42-1.74.42-4.81.42-4.81s0-3.07-.42-4.81z" fill="#FF0000"/>
+                                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#FFFFFF"/>
+                                        </svg>
+                                        <span>Recommended</span>
+                                    </div>
+                                    <div class="up-next-list" id="upNextList">
+                                        <!-- Dynamic horizontal video cards rendered via JS -->
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Infinite Scroll Loading Indicator -->
+                <div class="infinite-loader" id="infiniteScrollLoader" hidden>
+                    <div class="spinner"></div>
+                    <span>Loading more YouTube videos...</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sam Mascot -->
+        <div class="mascot" id="mascot" aria-hidden="true" style="position: fixed; bottom: 100px; right: 40px; z-index: 1000; pointer-events: auto;">
+          <div class="mascot-bubble" id="mascotBubble">
+            <span id="mascotText">Hi! I'm here to help.</span>
+          </div>
+          <div class="mascot-face" id="face">
+            <div class="eyebrow left"></div>
+            <div class="eyebrow right"></div>
+            <div class="eye left" id="eyeL"><span class="pupil"></span></div>
+            <div class="eye right" id="eyeR"><span class="pupil"></span></div>
+            <div class="blush left"></div>
+            <div class="blush right"></div>
+            <div class="mouth" id="mouth"></div>
+            <div class="hand left"></div>
+            <div class="hand right"></div>
+          </div>
+          <div class="mascot-body"></div>
+        </div>
+    </div>
+
+    <!-- Mouse-Following Tooltip for Blurred Comments -->
+    <div id="comment-tooltip" class="comment-tooltip">Click to open comments on YouTube ↗</div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+    <script src="mascot/responses.js"></script>
+    <script src="mascot/sam.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

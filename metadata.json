@@ -1,0 +1,8 @@
+{
+  "name": "TOG3R",
+  "description": "Imported from GitHub: SamDevlopments/TOG3R",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

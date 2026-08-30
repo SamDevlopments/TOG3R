@@ -1,0 +1,31 @@
+{
+  "entities": {
+    "User": {
+      "collection": "users",
+      "fields": {
+        "uid": { "type": "string", "required": true },
+        "email": { "type": "string", "required": true },
+        "name": { "type": "string" },
+        "handle": { "type": "string" },
+        "dob": { "type": "string" },
+        "gender": { "type": "string" },
+        "avatar": { "type": "string" },
+        "hasCompletedProfile": { "type": "boolean" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "ChatMessage": {
+      "collection": "chat_messages",
+      "fields": {
+        "userId": { "type": "string", "required": true },
+        "userName": { "type": "string", "required": true },
+        "avatarUrl": { "type": "string" },
+        "videoId": { "type": "string", "required": true },
+        "message": { "type": "string", "required": true },
+        "isEmoji": { "type": "boolean" },
+        "createdAt": { "type": "timestamp" }
+      }
+    }
+  }
+}
